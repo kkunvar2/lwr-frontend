@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { saveLoggedInUser } from '../../Services/authService';
 
 
 
@@ -51,8 +52,10 @@ const Log = () => {
 
             if (response.status === 200) {
                 localStorage.setItem('token', response.data.token);
+                saveLoggedInUser(inputs);
                 navigate('/dash');
                 console.log('Login Successfully');
+                window.location.reload(false)
             } else {
                 console.error('Login Failed');
             }
