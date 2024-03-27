@@ -14,6 +14,7 @@ import Dashboard from './Components/Dashboard/Dashboard'
 import Landing from './Components/LandingPage/Landing'
 import Log from './Components/Registration/Log'
 import Register from './Components/Registration/Register'
+import Maintanance from './Components/Maintanance/Maintanance'
 
 
 const App = () => {
@@ -52,6 +53,7 @@ const App = () => {
 
         
         {/* Maintanance */}
+        <Route path='/memMaintanance' element={<Maintanance/>}/>
 
         {/* FeedBack */}
         <Route path='/feed' element={<Feed />}/>

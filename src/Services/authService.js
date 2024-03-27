@@ -11,12 +11,18 @@ export const isLoggedIn = () => {
         return false;
     }
     else{
-        return true
+        return true;
     }
 }
 
-// get Logged in user
+//get Logged in user
 export const getLoggedInUser = () => {
     const username = sessionStorage.getItem('authenticatUser')
     return username;
+}
+
+//logout
+export const logoutUser = () => {
+    localStorage.clear();
+    sessionStorage.clear();
 }

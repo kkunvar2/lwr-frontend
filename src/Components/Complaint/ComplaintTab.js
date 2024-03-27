@@ -31,17 +31,18 @@ const ComplaintTab = () => {
 
     //Filter Complaints
     const filter = complaints.filter(complaint => {
-    if (!selType) return true; 
-    if (complaint.status !== selType) return false;
+    if (!selType && !title) return true; 
+    if (complaint.status === selType) return true;
     if (title && !complaint.title.toLowerCase().includes(title.toLowerCase())) return false; 
-    return true;
+    
+    return false;
   });
 
   //Delete Complaints
   const handleDelete = async(id) =>{
     const token = localStorage.getItem('token');
      await axios.delete(`http://localhost:8081/lwresident/v1/complaint/delete/${id}`, {
-      'Authorization': `Bearer ${token}`
+      'Authorization': `Bearer ${token}`,
      })
     .then(res => {
       setComplaints(complaints.filter(complaint => complaint.comid !== id))

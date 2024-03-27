@@ -1,10 +1,17 @@
 import React from 'react'
 import { Navbar } from 'flowbite-react';
-import { Link } from 'react-router-dom';
-import { isLoggedIn } from '../Services/authService';
+import { Link, useNavigate } from 'react-router-dom';
+import { isLoggedIn, logoutUser } from '../Services/authService';
 
 const Nav = () => {
-    const isLog = isLoggedIn()
+    const navigate = useNavigate();
+    const isLog = isLoggedIn();
+
+    //Logout
+    const handleLogout = () =>{
+        logoutUser();
+        navigate('/log');
+    }
   return (
     <>
            
@@ -24,9 +31,8 @@ const Nav = () => {
                             </Link>
                         }
                         {isLog &&
-                            <Link to='/'>
-                                <button className='bg-yellow-400 py-2 px-3 rounded-md mx-2 text-white font-semibold hover:bg-gray-700 focus:'>Logout</button>
-                            </Link>
+                                <button className='bg-yellow-400 py-2 px-3 rounded-md mx-2 text-white font-semibold hover:bg-gray-700 focus:'
+                                        onClick={handleLogout}>Logout</button>
                         }
                                                 
                         <Navbar.Toggle />
