@@ -61,7 +61,6 @@ const ComplaintTab = () => {
                         >
                     <option className='bg-gray-800'>Status</option>
                     <option className='bg-gray-800 font-medium text-sm text-yellow-400'>PROGRESS</option>
-                    <option className='bg-gray-800 font-medium text-sm text-slate-300'>In Progres</option>
                     <option className='bg-gray-800 font-medium text-sm text-green-400'>COMPLETED</option>
                     <option name='Other' className='bg-gray-800 font-medium text-sm text-slate-300'>Other</option>
                  </select>
