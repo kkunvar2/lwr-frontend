@@ -16,7 +16,7 @@ const Nav = () => {
     <>
            
                 <Navbar fluid rounded className='sticky top-0 shadow-lg '>
-                    <Navbar.Brand href="https://flowbite-react.com">
+                    <Navbar.Brand href="https://localhost:3000/">
                         <span className="self-center whitespace-nowrap text-xl font-bold dark:text-white">LW Residential</span>
                     </Navbar.Brand>
                     <div className="flex md:order-2">
