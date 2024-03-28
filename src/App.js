@@ -1,4 +1,3 @@
-import React, { Children } from 'react'
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import GuestReport from './Components/Guest/GuestReport'
 import ComplaintTab from './Components/Complaint/ComplaintTab'
@@ -16,6 +15,7 @@ import Log from './Components/Registration/Log'
 import Register from './Components/Registration/Register'
 import Maintanance from './Components/Maintanance/Maintanance'
 import { isLoggedIn } from './Services/authService'
+import Profile from './Components/Profile'
 
 
 const App = () => {
@@ -70,6 +70,9 @@ const App = () => {
         
         {/* Maintanance */}
         <Route path='/memMaintanance' element={<Maintanance/>}/>
+
+        {/* Profile */}
+        <Route path='/profile' element={<Profile />}/>
 
         {/* FeedBack */}
         <Route path='/feed' element={<Feed />}/>
