@@ -33,7 +33,7 @@ const ComplaintTab = () => {
     const filter = complaints.filter(complaint => {
     if (!selType && !title) return true; 
     if (complaint.status === selType) return true;
-    if (title && !complaint.title.toLowerCase().includes(title.toLowerCase())) return false; 
+    if (title && complaint.title.toLowerCase().includes(title.toLowerCase())) return true; 
     
     return false;
   });
@@ -60,9 +60,8 @@ const ComplaintTab = () => {
                         onChange={(e) => setselType(e.target.value)}
                         >
                     <option className='bg-gray-800'>Status</option>
-                    <option className='bg-gray-800 font-medium text-sm text-yellow-400'>Pending</option>
-                    <option className='bg-gray-800 font-medium text-sm text-slate-300'>In Progres</option>
-                    <option className='bg-gray-800 font-medium text-sm text-green-400'>Solved</option>
+                    <option className='bg-gray-800 font-medium text-sm text-yellow-400'>PROGRESS</option>
+                    <option className='bg-gray-800 font-medium text-sm text-green-400'>COMPLETED</option>
                     <option name='Other' className='bg-gray-800 font-medium text-sm text-slate-300'>Other</option>
                  </select>
                  {selType === 'Other' && (
