@@ -1,5 +1,5 @@
-import React from 'react'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import React, { Children } from 'react'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import GuestReport from './Components/Guest/GuestReport'
 import ComplaintTab from './Components/Complaint/ComplaintTab'
 import ComplaintForm from './Components/Complaint/ComplaintForm'
@@ -15,11 +15,23 @@ import Landing from './Components/LandingPage/Landing'
 import Log from './Components/Registration/Log'
 import Register from './Components/Registration/Register'
 import Maintanance from './Components/Maintanance/Maintanance'
+import { isLoggedIn } from './Services/authService'
 
 
 const App = () => {
-
   
+  //Secure Routes
+    const Authenticated = ({children}) => {
+      const isAuth = isLoggedIn();
+
+      if(isAuth){
+        return children;
+      }
+      else{
+        return <Navigate to='/log'/>
+      }
+    } 
+
   return (
     <>
     <BrowserRouter>
@@ -32,7 +44,11 @@ const App = () => {
         <Route path='/register' element={<Register />}/>
 
         {/* Dashboard */}
-        <Route path='/dash' element={<Dashboard />}/>
+        <Route path='/dash'  
+            element={<Authenticated>
+              <Dashboard />
+            </Authenticated>
+        }/>
 
         {/* Guest */}
         <Route path='/guest' element={<Guest/>}/>
