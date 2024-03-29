@@ -45,7 +45,7 @@ const MemMeeting = () => {
         const searchdate = e.target.value;
 
         const filter = meetings.filter((meet) => {
-            meet.date.includes(searchdate)
+            return meet.date.includes(searchdate)
         })
         setmeetings(filter)
     }

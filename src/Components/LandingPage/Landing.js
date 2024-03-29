@@ -23,7 +23,7 @@ const Landing = () => {
       <div className='hero-section'>
         <h1 className='animate__animated animate__zoomIn'>Welcome to <span className='tl'>L</span>/<span className='tw'>W</span> Residential</h1>
         <div className='gradienet-fill'>
-          <p className=''>Have Fabulous Flate and awsome Society</p>
+          <p className=''>Have Fabulous Flat and awesome Society</p>
         </div>
         <div className='guest'>
         <Link to='/guest'>

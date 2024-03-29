@@ -17,7 +17,7 @@ const Nav = () => {
   return (
     <>
            
-                <Navbar fluid rounded className='sticky top-0 shadow-lg py-1'>
+                <Navbar fluid rounded className='sticky top-0 shadow-lg pt-3 pb-0'>
                     <Navbar.Brand href="https://localhost:3000/">
                         <span className="self-center whitespace-nowrap text-xl font-bold dark:text-white">LW Residential</span>
                     </Navbar.Brand>

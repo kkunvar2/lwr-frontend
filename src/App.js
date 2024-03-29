@@ -16,6 +16,9 @@ import Register from './Components/Registration/Register'
 import Maintanance from './Components/Maintanance/Maintanance'
 import { isLoggedIn } from './Services/authService'
 import Profile from './Components/Profile'
+import Sidebar from './Components/Admin/Sidebar'
+import AdminDashboard from './Components/Admin/AdminDashboard'
+import Approval from './Components/Admin/Approval'
 
 
 const App = () => {
@@ -36,6 +39,11 @@ const App = () => {
     <>
     <BrowserRouter>
       <Routes>
+
+        {/* Admin */}
+        <Route path='/admindashboard' element={<AdminDashboard />}/>
+        <Route path='/approval' element={<Approval />}/>
+        
         {/* Landing Page */}
         <Route path='/' element={<Landing />}/>
 
@@ -67,7 +75,6 @@ const App = () => {
         <Route path='/memmeeting' element={<MemMeeting />}/>
         <Route path='/secmeeting' element={<SecMeetings/>}/>
 
-        
         {/* Maintanance */}
         <Route path='/memMaintanance' element={<Maintanance/>}/>
 
