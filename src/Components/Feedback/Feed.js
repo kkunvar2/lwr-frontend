@@ -5,6 +5,7 @@ const Feed = () => {
 
     const form = useRef(null)
     const [error, seterror] = useState(null)
+    const [success, setsuccess] = useState(null)
     
     const handleSubmit = async(e) => {
         e.preventDefault()
@@ -19,7 +20,12 @@ const Feed = () => {
             body: JSON.stringify(feed)
         })
         
-
+        if(response.ok) {
+            setTimeout(() =>{
+                setsuccess("Feedback SuccessFully Submited")
+            }, 2000)
+        }
+    
         const data = await response.json()
         if(data?.error){
             seterror(data.error)
@@ -43,6 +49,11 @@ const Feed = () => {
                     {/* Form */}
                     <div >
                          <div className='md:mt-12 bg-white rounded-xl shadow-lg p-8 text-gray-600 md:w-90 '>
+                            {success && 
+                                <div className='w-20 h-20 bg-white flex justify-center items-center'>
+                                    <h1 className='font-bold text-green-600 tracking-wider'>{success}</h1>
+                                </div>
+                            }
                             <form className='flex flex-col space-y-4'
                             onSubmit={handleSubmit} ref={form}>
                                 {/* name */}

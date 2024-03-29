@@ -29,7 +29,7 @@ const AdminDashboard = () => {
                   <h2 className='text-2xl'>Secrataries</h2>
                 </div>
                 <div className='text-5xl font-bold text-white'>
-                  12+
+                  3+
                 </div>
               </div>
 
@@ -40,7 +40,7 @@ const AdminDashboard = () => {
                     <h2 className='text-2xl'>Members</h2>
                 </div>
                   <div className='text-5xl font-bold text-white'>
-                  3+
+                  12+
                 </div>
               </div>
 
