@@ -39,7 +39,7 @@ const MemEvent = () => {
 }
 
   const handleCheck = () => {
-    // logic for getting book value true
+    // for getting book value true
     setvalues({
       ...values,
       check: true
@@ -89,7 +89,7 @@ return (
                 <input
                   type="text"
                   placeholder='Enter other type'
-                  name="otherType="
+                  name="otherType"
                   value={values.otherType}
                   onChange={handlechange}
                   className='w-[45%] max-md:w-[90%] bg-gray-600 bg-opacity-20 focus:bg-transparent focus:ring-2 focus:ring-yellow-900 rounded border border-gray-600 focus:border-yellow-500 text-base outline-none text-gray-100 px-3 leading-8 transition-colors duration-200 ease-in-out"'

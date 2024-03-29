@@ -14,11 +14,11 @@ const AdminDashboard = () => {
     <>
     <div className="flex flex-col lg:flex-row bg-gray-300 min-h-screen">
         <Sidebar />
-        {/* Main Panel */}
+        {/* Main Panel */}  
         <div className="w-full lg:flex-1 p-2 ">
-            <Nav/>
+            {/* <Nav/> */}
             {/* content */}
-            <h1 className='font-semibold text-gray-400 text-4xl'>Dashboard</h1>
+            <h1 className='font-semibold text-gray-400 text-4xl py-4'>Dashboard</h1>
             <div className=' px-16 py-12'>
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
               
@@ -45,9 +45,9 @@ const AdminDashboard = () => {
               </div>
 
               {/* Card 3 */}
-              <div className=" flex-col bg-gradient-to-l from-orange-500 to-orange-300 p-4 rounded-lg shadow-lg flex items-center justify-center h-[12rem] transform transition duration-300  hover:scale-105">
+              {/* <div className=" flex-col bg-gradient-to-l from-orange-500 to-orange-300 p-4 rounded-lg shadow-lg flex items-center justify-center h-[12rem] transform transition duration-300  hover:scale-105">
                 
-              </div>
+              </div> */}
 
               </div>
             </div>

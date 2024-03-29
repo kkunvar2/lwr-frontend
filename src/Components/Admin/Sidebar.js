@@ -3,6 +3,7 @@ import { RiLogoutCircleRLine } from "react-icons/ri";
 import { FaUser, FaBoxOpen } from 'react-icons/fa'
 import {MdSpaceDashboard} from 'react-icons/md'
 import { useNavigate } from 'react-router-dom';
+import { logoutUser } from '../../Services/authService';
 
 const Sidebar = () => {
 
@@ -15,15 +16,16 @@ const Sidebar = () => {
     const handelApproval = () => {
       navigate('/approval')
     }
-  
-    
-    const handelUser = () => {
-        navigate('/addUser')
+      
+    const handelMeetings = () => {
+        navigate('/createmeeting')
     }
 
     const handelNavigation = () => {
+      logoutUser();
       navigate('/log')
     }
+
   return (
     <>
         {/* Sidebar */}
@@ -50,15 +52,15 @@ const Sidebar = () => {
               </button>
               <FaUser className="ml-2 w-5 h-5 text-black " />
             </div>
-            {/* <div
+            <div
               className="flex items-center justify-between py-3 px-2 transform transition dublack00 hover:scale-105 hover:bg-gray-400 hover:rounded-2xl  "
-              onClick={handelProduct}
+              onClick={handelMeetings}
             >
               <button className="ml-2 text-gray-400 hover:text-white">
-                Add Product
+                Arrange Meetings
               </button>
               <FaBoxOpen className=" w-5 h-5 text-black " />
-            </div> */}
+            </div>
           </div>
           <div className="mt-auto">
             <div

@@ -8,7 +8,6 @@ import Guest from './Components/Guest/Guest'
 import GuestForm from './Components/Guest/GuestForm'
 import GuestRecords from './Components/Guest/GuestRecords'
 import MemMeeting from './Components/Meetings/MemMeeting'
-import SecMeetings from './Components/Meetings/SecMeetings'
 import Dashboard from './Components/Dashboard/Dashboard'
 import Landing from './Components/LandingPage/Landing'
 import Log from './Components/Registration/Log'
@@ -16,9 +15,9 @@ import Register from './Components/Registration/Register'
 import Maintanance from './Components/Maintanance/Maintanance'
 import { isLoggedIn } from './Services/authService'
 import Profile from './Components/Profile'
-import Sidebar from './Components/Admin/Sidebar'
 import AdminDashboard from './Components/Admin/AdminDashboard'
 import Approval from './Components/Admin/Approval'
+import SecMeetings from './Components/Admin/CreateMeetings'
 
 
 const App = () => {
@@ -73,7 +72,7 @@ const App = () => {
 
         {/* Meetings */}
         <Route path='/memmeeting' element={<MemMeeting />}/>
-        <Route path='/secmeeting' element={<SecMeetings/>}/>
+        <Route path='/createmeeting' element={<SecMeetings/>}/>
 
         {/* Maintanance */}
         <Route path='/memMaintanance' element={<Maintanance/>}/>
