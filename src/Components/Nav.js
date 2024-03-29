@@ -17,7 +17,7 @@ const Nav = () => {
   return (
     <>
            
-                <Navbar fluid rounded className='sticky top-0 shadow-lg py-1'>
+                <Navbar fluid rounded className='sticky top-0 shadow-lg pt-2 pb-0'>
                     <Navbar.Brand href="https://localhost:3000/">
                         <span className="self-center whitespace-nowrap text-xl font-bold dark:text-white">LW Residential</span>
                     </Navbar.Brand>
@@ -46,12 +46,19 @@ const Nav = () => {
                                                 
                         <Navbar.Toggle />
                     </div>
-                    <Navbar.Collapse className=''>
-                            <Navbar.Link  active className='bg-blue-500'>
-                                Home
-                            </Navbar.Link>
+                    <Navbar.Collapse className='pt-3'>
+                            <Link to='/'>
+                                    <Navbar.Link  active className='ml-12 bg-blue-500'>Home</Navbar.Link>                                                    
+                            </Link>
+
+
                             <Navbar.Link href="#">About</Navbar.Link>
                             <Navbar.Link href="#">Contact</Navbar.Link>
+                            <Link to='/dash'>
+                                {isLog &&
+                                    <Navbar.Link >Dashboard</Navbar.Link>
+                                }
+                            </Link>
                     
                     </Navbar.Collapse>
                 </Navbar>   

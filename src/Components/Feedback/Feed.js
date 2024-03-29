@@ -1,8 +1,9 @@
 import React, { useRef, useState } from 'react'
 import bg from "../Assests/img_2.jpg"
+import axios from 'axios'
 
 const Feed = () => {
-
+    const [data, setdata] = useState([])
     const form = useRef(null)
     const [error, seterror] = useState(null)
     
@@ -13,11 +14,16 @@ const Feed = () => {
 
         console.log(feed);
         
-        const response = await fetch(``,{
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify(feed)
+        const response = await axios.post('http://localhost:8081/api/v1/auth/feedback')
+        .then(() => {
+            setdata(feed)
         })
+
+        // const response = await fetch(`http://localhost:8081/api/v1/auth/feedback`,{
+        //     method: 'POST',
+        //     headers: {'Content-Type': 'application/json'},
+        //     body: JSON.stringify(feed)
+        // })
         
 
         const data = await response.json()
