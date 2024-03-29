@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react'
 const MemMeeting = () => {
     const [show, setshow] = useState(true)
     const [meetings, setmeetings] = useState([])
-    const [loading, setloading] = useState(true)
+    // const [loading, setloading] = useState(true)
 
 
     const fetchMeetings = async () => {
@@ -17,12 +17,12 @@ const MemMeeting = () => {
             .then((res) => {
                 setmeetings(res.data);
                 console.log(res.data);
-                setloading(false);
+                // setloading(false);
                 setshow(Array(res.data.length).fill(false));
             })    
             .catch((error)=> {
                 console.error('Error fetching meetings:', error);
-                setloading(false);
+                // setloading(false);
             }) 
             
     };
@@ -74,7 +74,7 @@ const MemMeeting = () => {
             {/* Meeting lists */}
             <div className='grid grid-cols-1 md:grid-cols-4 mt-5 px-5 gap-3'>
             {/* Card 1 */}
-            {meetings.map((meeting, index) =>{
+            {meetings.map((meeting, index) =>(
                 <div className="relative max-w-sm p-5 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
                     key={index}>
                     <div className='flex justify-between item-center'>
@@ -109,7 +109,7 @@ const MemMeeting = () => {
                         </div>
                     </div> }    
                 </div>             
-            })}
+            ))}
             
             {/* card 2 */}
                
