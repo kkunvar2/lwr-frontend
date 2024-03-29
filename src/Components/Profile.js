@@ -16,16 +16,16 @@ const Profile = () => {
         mobile: '',
         email: '',
         password: '',
-        // wing: '',
-        // flat: ''
+        wing: 'c',
+        flat: '01'
       })
     
 
     //Retrieve Data
     const fetchData = async() =>{
     const token = localStorage.getItem('token');
-    const userId = parseInt(userData.id); 
-        await axios.get(`http://localhost:8081/lwresident/v1/profile/${userId}`, {
+    // const userId = parseInt(userData.id); 
+        await axios.get(`http://localhost:8081/lwresident/v1/member/getUser`, {
             headers: {
                 'Authorization': `Bearer ${token}` 
             }
@@ -42,11 +42,12 @@ const Profile = () => {
     const handleSubmit = (e) =>{
         e.preventDefault();
 
-        axios.put('https://localhost:8081/lwresident/v1/profilw', userData)
+        axios.patch('http://localhost:8081/lwresident/v1/member/updateProfile', userData)
         .then(res => {
           alert("Data updated") 
         })
         .catch(err => console.log("user Data didn't Updated",err));
+        console.log(userData)
     }
 
     useEffect(() =>{
@@ -77,8 +78,8 @@ const handleLogout = () =>{
                 <div className='flex py-10 items-center gap-12'>
                     <LuUser2 className='h-24 w-24'/>
                     <div className='flex  flex-col gap-4'>
-                        <h4 className='md:text-5xl text-2xl text-gray-700 font-semibold'>Welcome <span className='text-yellow-500'>Dixit Vara</span></h4>
-                        
+                            <h4 className='md:text-5xl text-2xl text-gray-700 font-semibold'>Welcome <span className='text-yellow-500'>{userData.name}</span></h4>
+                    
                         <div className='flex gap-1  cursor-pointer'
                             onClick={() => setEditProfile(!editProfile)}>
                             <p className='text-yellow-500 hover:text-gray-600'>Edit Profile</p>
