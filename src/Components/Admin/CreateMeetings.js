@@ -6,8 +6,8 @@ const  CreateMeetings = () => {
   const [success, setsuccess] = useState(false)
   const [values, setvalues] = useState({
     agenda: '',
-    meetdate: '',
-    meettime: ''
+    date: '',
+    time: ''
   })
 
   const handlechange = (e) => {
@@ -23,7 +23,8 @@ const  CreateMeetings = () => {
 
     const token = localStorage.getItem('token')
 
-    const response = await axios.post('http://localhost:8081/lwresident/v1/', values, {
+    console.log(values);
+    await axios.post('http://localhost:8081/lwresident/v1/meetings/raiseMeeting', values, {
       headers: {
         'Authorization': `Bearer ${token}` 
       }
@@ -32,8 +33,8 @@ const  CreateMeetings = () => {
       setsuccess(true)
       setvalues({
         agenda: '',
-        meetdate: '',
-        meettime: ''
+        date: '',
+        time: ''
 
       });
       console.log("Meeting Scheduled submited successfully");
@@ -62,16 +63,16 @@ const  CreateMeetings = () => {
                         <div className='flex gap-3'>
                           <input 
                             onChange={handlechange} 
-                            value={values.meetdate}
+                            value={values.date}
                             type="date"  
-                            name="meetdate" 
+                            name="date" 
                             className=" h-10 w-10 bg-gray-600 bg-opacity-20 focus:bg-gray-600 focus:bg-opacity-20 rounded-full border border-gray-600 focus:border-yellow-300 text-base outline-none text-gray-100 px-3 leading-8 transition-colors duration-200 ease-in-out"
                           />
                           <input 
                             onChange={handlechange}
-                            value={values.meettime}
+                            value={values.time}
                             type="time"  
-                            name="meettime" 
+                            name="time" 
                             className="h-10 w-14 bg-gray-600 bg-opacity-20 focus:bg-gray-600 focus:bg-opacity-20 rounded-full border border-gray-600 focus:border-yellow-300 text-base outline-none text-gray-100 pr-4 leading-8 transition-colors duration-200 ease-in-out"
                           />
                         </div>

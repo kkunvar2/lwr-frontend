@@ -9,7 +9,7 @@ const GuestRecords = () => {
     const [guest, setguest] = useState([])
     const fetchData = async() =>{
         try {
-            const response = await axios.get(``)
+            const response = await axios.get(`http://localhost:8081/lwresident/v1/guest/viewVisitors`)
             setguest(response.data)
             }
         catch (error) {
@@ -41,9 +41,9 @@ const GuestRecords = () => {
                                 {guest.name}
                             </td>
                             <td className="px-6 py-4">{moment(guest.checkIn).format('YYYY-MM-DD')}</td>
-                            <td className="px-6 py-4">{guest.number}</td>
+                            <td className="px-6 py-4">{guest.mobile}</td>
                             <td className="px-6 py-4">{moment(guest.checkIn).format('hh:mm:ss A')}</td>
-                            <td className="px-6 py-4">{moment(guest.checkIn).format('hh:mm:ss A')}</td>
+                            <td className="px-6 py-4">{moment(guest.checkOut).format('hh:mm:ss A')}</td>
                         </tr>
                     ))}
                     {/* <tr className="border-b hover:bg-slate-300 text-">

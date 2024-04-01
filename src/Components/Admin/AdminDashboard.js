@@ -9,7 +9,6 @@ import Nav from '../Nav';
 
 const AdminDashboard = () => {
 
-
   return (
     <>
     <div className="flex flex-col lg:flex-row bg-gray-300 min-h-screen">

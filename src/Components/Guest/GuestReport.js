@@ -10,7 +10,7 @@ const GuestReport = () => {
 
     const fetchData = async() => {
         try {
-            const response = await axios.get(``)
+            const response = await axios.get(`http://localhost:8081/lwresident/v1/guest/viewUser`)
             setguest(response.data)
             
         } catch (error) {
@@ -23,7 +23,7 @@ const GuestReport = () => {
     }, [])
 
     const hanlecheckOut = () =>{
-        navigate('/');
+        navigate('/guest');
     }
     return (
         <>
@@ -46,7 +46,7 @@ const GuestReport = () => {
                                 </td>
                                 <td className="px-6 py-4">{guest.date}</td>
                                 <td className="px-6 py-4">{moment(guest.checkIn).format('hh:mm:ss A')}</td>
-                                <td className="px-6 py-4">{guest.number}</td>
+                                <td className="px-6 py-4">{guest.mobile}</td>
                                 <td className="px-6 py-4">
                                     <button onClick={hanlecheckOut} className='bg-red-500 text-white p-[6px] rounded-md font-medium hover:bg-red-700'>Check Out</button>
                                 </td>

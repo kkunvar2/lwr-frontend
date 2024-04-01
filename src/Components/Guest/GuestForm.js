@@ -26,7 +26,7 @@ const GuestForm = () => {
 
     const handleCheckIn = () => {
 
-        fetch('http://localhost:8080/api/v1/guest-user/check-in', {
+        fetch('http://localhost:8081/lwresident/v1/guest/raiseEntry', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
