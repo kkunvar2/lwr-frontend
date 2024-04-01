@@ -3,6 +3,7 @@ import Sidebar from './Sidebar'
 import axios from 'axios'
 const  CreateMeetings = () => {
 
+  const [success, setsuccess] = useState(false)
   const [values, setvalues] = useState({
     agenda: '',
     meetdate: '',
@@ -22,17 +23,18 @@ const  CreateMeetings = () => {
 
     const token = localStorage.getItem('token')
 
-    const response = await axios.post('', {
+    const response = await axios.post('http://localhost:8081/lwresident/v1/', values, {
       headers: {
         'Authorization': `Bearer ${token}` 
       }
     })
     .then((res) => {
-      setvalues(res.data)
+      setsuccess(true)
       setvalues({
         agenda: '',
         meetdate: '',
         meettime: ''
+
       });
       console.log("Meeting Scheduled submited successfully");
     })
@@ -83,12 +85,17 @@ const  CreateMeetings = () => {
                               name="agenda"
                               value={values.agenda}
                               onChange={handlechange}
+                              required
                               className="w-[45%] max-md:w-[90%] text-black bg-gray-600 bg-opacity-20 focus:bg-gray-600  focus:bg-opacity-20 rounded border border-gray-600 focus:border-yellow-300 text-base outline-none  px-3 leading-8 transition-colors duration-200 ease-in-out"
                             />
                       </div>
 
-                      <div className='p-2 text-right'>
-                        <button className='p-3 bg-yellow-400 hover:bg-slate-300 text-white font-medium shadow-xl rounded-md'>Submit</button>
+                      <div className='p-2 flex justify-between items-center'>
+                        {success && 
+                        <div className=' bg-gray-300 shadow-inner p-1 rounded-md font-semibold text-lg text-green-500 tracking-wide outlinr'>Meeting Scheduled</div>}
+                        <div></div>
+                        <button className='p-3 bg-yellow-400 hover:bg-slate-800 text-white font-medium shadow-xl rounded-md'
+                              type='submit'>Submit</button>
                       </div>
                     </form>
                   </div>

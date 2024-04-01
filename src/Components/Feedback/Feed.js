@@ -21,8 +21,9 @@ const Feed = () => {
         })
         
         if(response.ok) {
-            setTimeout(() =>{
-                setsuccess("Feedback SuccessFully Submited")
+            setsuccess("Feedback SuccessFully Submited")
+            setTimeout(() => {
+                setsuccess("");
             }, 2000)
         }
     

@@ -15,7 +15,9 @@ const Approval = () => {
                     <div className=' px-16 py-12 '>
                         {/* Approval */}
                         <div className='grid grid-col-1'>
-
+                            <div>
+                                <p className='text-right text-sm font-semibold text-sky-500'>USERS</p>
+                            </div>
                         </div>
                     </div>
                 </div>
