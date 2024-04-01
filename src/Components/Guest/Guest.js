@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 const Guest = () => {
   return (
     <>
-         <div className=' lg:h-screen bg-slate-800 pb-2'> 
+         <div className=' h-screen lg:h-[50rem] bg-slate-800 pb-2'> 
          {/* navbar */}
          
           {/* Guest User */}

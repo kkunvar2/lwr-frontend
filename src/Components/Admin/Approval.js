@@ -1,6 +1,5 @@
 import React from 'react'
 import Sidebar from './Sidebar'
-import Nav from '../Nav'
 
 const Approval = () => {
   return (

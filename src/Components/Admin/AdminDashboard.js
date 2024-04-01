@@ -1,11 +1,9 @@
 import React from 'react'
-import { useNavigate } from 'react-router-dom'
 //icons
 import { PiUsersBold } from "react-icons/pi";
 
 import { PiUsersThree } from "react-icons/pi";
 import Sidebar from './Sidebar';
-import Nav from '../Nav';
 
 const AdminDashboard = () => {
 

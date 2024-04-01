@@ -22,8 +22,21 @@ const GuestReport = () => {
         fetchData();
     }, [])
 
-    const hanlecheckOut = () =>{
-        navigate('/guest');
+    const hanlecheckOut = async() =>{
+        try{
+            const token = localStorage.getItem('token')
+            const response  = await axios.delete('http:localhost:8081/lwresident/v1/checkout', {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+            if(response.ok){
+                navigate('/guest');
+            }
+        } catch(err){
+            console.log("Can't Deleted records");
+        }
+
     }
     return (
         <>
