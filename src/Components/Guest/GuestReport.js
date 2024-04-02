@@ -22,7 +22,7 @@ const GuestReport = () => {
         fetchData();
     }, [])
 
-    const hanlecheckOut = async() =>{
+    const hanlecheckOut = async(id) =>{
         try{
             const token = localStorage.getItem('token')
             const response  = await axios.delete('http:localhost:8081/lwresident/v1/checkout', {
@@ -32,6 +32,8 @@ const GuestReport = () => {
             })
             if(response.ok){
                 navigate('/guest');
+                alert("checkOut Successful");
+                setguest(guest.filter(g => g.id !== id))
             }
         } catch(err){
             console.log("Can't Deleted records");
@@ -61,7 +63,7 @@ const GuestReport = () => {
                                 <td className="px-6 py-4">{moment(guest.checkIn).format('hh:mm:ss A')}</td>
                                 <td className="px-6 py-4">{guest.mobile}</td>
                                 <td className="px-6 py-4">
-                                    <button onClick={hanlecheckOut} className='bg-red-500 text-white p-[6px] rounded-md font-medium hover:bg-red-700'>Check Out</button>
+                                    <button onClick={() => hanlecheckOut(guest.id)} className='bg-red-500 text-white p-[6px] rounded-md font-medium hover:bg-red-700'>Check Out</button>
                                 </td>
                             </tr>
                         ))}
