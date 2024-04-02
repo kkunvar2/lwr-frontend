@@ -42,7 +42,9 @@ const ComplaintTab = () => {
   const handleDelete = async(id) =>{
     const token = localStorage.getItem('token');
      await axios.delete(`http://localhost:8081/lwresident/v1/complaint/delete/${id}`, {
-      'Authorization': `Bearer ${token}`,
+      headers:{
+        'Authorization': `Bearer ${token}`
+      }
      })
     .then(res => {
       setComplaints(complaints.filter(complaint => complaint.comid !== id))

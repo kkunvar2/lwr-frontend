@@ -78,7 +78,7 @@ const  CreateMeetings = () => {
   const handleConclusion = async() => {
     try {
       const token = localStorage.getItem('token')
-      const response = await axios.post('http://localhost:8081/lwresident/v1/conclusion', {conclusion: values.conclusion}, {
+      const response = await axios.post('http://localhost:8081/lwresident/v1/updateconclusion/', {conclusion: values.conclusion}, {
         headers:{
           'Authorization': `Bearer ${token}`
         }
@@ -93,8 +93,16 @@ const  CreateMeetings = () => {
   }
 
   //delete
-  const handleDelete = () => {
-
+  const handleDelete = async(id) => {
+    const token = localStorage.getItem('token');
+     await axios.delete(`http://localhost:8081/lwresident/v1/meetings/deleteMeeting/${id}`, {
+      headers:{
+        'Authorization': `Bearer ${token}`
+      }
+     })
+    .then(res => {
+      setmeetings(meetings.filter(meet => meet.id !== id))
+    })
   }
  
   return (
@@ -182,9 +190,9 @@ const  CreateMeetings = () => {
                             </thead>
                             <tbody className='h-[10rem]'>
                               {meetings.map((meeting) =>(
-                                <tr key={meeting.id} className="bg-white border-b">
+                                <tr key={meeting.meetingid} className="bg-white border-b">
                                     <th className="px-6 py-4 font-semibold text-lg text-yellow-400 whitespace-nowrap">
-                                        {meeting.id}
+                                        {meeting.meetingid}
                                     </th>
                                     <td  className="px-6 py-4 text-black">
                                         {meeting.agenda}
@@ -200,7 +208,7 @@ const  CreateMeetings = () => {
                                               onClick={() => setconclusion(true)}> Conclusion</button>
                                     </td>
                                     <td  className="px-6 py-4 text-right cursor-pointer">
-                                      <FontAwesomeIcon onClick={() => handleDelete()} icon={faTrash} size="lg" style={{ color: "#f66151" }} />    
+                                      <FontAwesomeIcon onClick={() => handleDelete(meeting.meetingid)} icon={faTrash} size="lg" style={{ color: "#f66151" }} />    
                                     </td>
                                 </tr>
                               ))}

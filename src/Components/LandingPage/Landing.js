@@ -25,12 +25,7 @@ const Landing = () => {
         <div className='gradienet-fill'>
           <p className=''>Have Fabulous Flat and awesome Society</p>
         </div>
-        <div className='guest'>
-        <Link to='/guest'>
-          <button className='btn-guest'>Enter as a Guest</button>
-        </Link>
         </div>
-      </div>
 
       {/* Services */}
       <div className='service-container'>
@@ -38,8 +33,8 @@ const Landing = () => {
         <div className='row'>
           <div className='service'>
             <FaCar fontSize="40px" markerEnd='10px'/>
-            <h2 className=''>Parking</h2>
-            <p>Manage Parking, secure your vehical under the guard</p>
+            <h2 className=''>Meetigns</h2>
+            <p>Manage Meetings, schedule meetings any time without any problem with conclusions.</p>
           </div>
           <div className='service'>
             <GiPoliceOfficerHead  fontSize="40px" markerEnd='10px'/>

@@ -23,22 +23,19 @@ const GuestReport = () => {
     }, [])
 
     const hanlecheckOut = async(id) =>{
-        try{
+       
             const token = localStorage.getItem('token')
-            const response  = await axios.delete('http:localhost:8081/lwresident/v1/checkout', {
+            await axios.patch(`http://localhost:8081/lwresident/v1/guest/checkout/${id}`, {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
             })
-            if(response.ok){
-                navigate('/guest');
-                alert("checkOut Successful");
+            .then(res => {
                 setguest(guest.filter(g => g.id !== id))
-            }
-        } catch(err){
-            console.log("Can't Deleted records");
-        }
-
+                alert("checkOut Successful");
+                navigate('/guest');
+            })  
+            .catch(err =>  console.log("Can't Checkout"))
     }
     return (
         <>
@@ -54,8 +51,8 @@ const GuestReport = () => {
                         </tr>
                     </thead>
                     <tbody className="bg-slate-200">
-                        {guest.map((guest, index) => (
-                            <tr key={index} className="border-b hover:bg-slate-300">
+                        {guest.map((guest) => (
+                            <tr key={guest.id} className="border-b hover:bg-slate-300">
                                 <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                     {guest.name}
                                 </td>

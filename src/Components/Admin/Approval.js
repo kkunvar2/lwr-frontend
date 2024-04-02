@@ -13,7 +13,7 @@ const Approval = () => {
     //Fetched user Data
     const fetchedData = async() => {
         const token = localStorage.getItem('token')
-        await axios.get('http://localhost:8081/lwresident/v1/aprrovalList', {
+        await axios.get('http://localhost:8081/lwresident/v1/admin/view-requests', {
             headers:{
                 'Authoization': `Bearer ${token}`
             } 
@@ -48,7 +48,7 @@ const Approval = () => {
     const handleReject = () => {
         try{
             const token = localStorage.getItem('token')
-            const response = axios.patch('http://localhost:8081/lwresident/v1/reject',{
+            const response = axios.patch('http://localhost:8081/lwresident/v1/admin/reject',{
                 headers:{
                     'Authoization': `Bearer ${token}`
                 } 
@@ -76,36 +76,18 @@ const Approval = () => {
                             <div>
                                 <p className='text-right text-sm font-semibold text-sky-500'>USERS</p>
                             </div>
-                            <div className=' flex items-center justify-between bg-gray-50 p-5 rounded-md shadow-md'>
-                                <div className='flex md:gap-12 gap-6 items-center md:w-[32rem]'>
-                                    <h2 className=' font-medium'>12</h2>
-                                    <div className='flex flex-col gap-1 w-[45%] md:w-[19%]'>
-                                        <h2 className='text-sm font-semibold bg-yellow-400 p-[2.5px] text-white text-center rounded-full'>Dixit Vara</h2>
-                                        <p className='text-[12px]'>Date: 2/04/2024</p>
-                                    </div>
-                                    <p className='text-[12px] md:text-[15px] tracking-widest font-medium text-slate-400 '>
-                                        Requesting for <span className='text-gray-500'>Secratary</span> role...</p>
-                                </div>
-                                <div className='flex gap-4 justify-center'>
-                                    <img src={accept}
-                                        title='Accept'
-                                        className='w-7 h-7 cursor-pointer'/>
-                                    <img src={reject}
-                                        title='Reject'
-                                        className='w-7 h-7 cursor-pointer'/>
-                                </div>
-                            </div>
+
                             { userList.map((user) => (    
                                 <div key={user.id} className=' flex items-center justify-between bg-gray-50 p-5 rounded-md shadow-md'>
                                     <div className='flex md:gap-12 gap-6 items-center md:w-[32rem]'>
                                         <h2 className=' font-medium'>{user.id}</h2>
                                         <div className='flex flex-col gap-1 w-[45%] md:w-[19%]'>
-                                            <h2 className='text-sm font-semibold bg-yellow-400 p-[2.5px] text-white text-center rounded-full'>Dixit Vara</h2>
+                                            <h2 className='text-sm font-semibold bg-yellow-400 p-[2.5px] text-white text-center rounded-full'>{user.name}</h2>
                                             <p className='text-[12px]'>Date: {user.date}</p>
                                         </div>
                                         <p className='text-[12px] md:text-[15px] tracking-widest font-medium text-slate-400 '>
                                             {user.status == "APPROVED" ? `Approved for ${<span className='text-gray-500'>{user.role}</span>}` 
-                                            : `Requesting for ${<span className='text-gray-500'>{user.role}</span>}`} role...
+                                            : `Requesting for ${user.role}`} role...
                                         </p>
                                     </div>
                                     <div className='flex gap-4 justify-center'>
