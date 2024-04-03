@@ -39,8 +39,7 @@
 
 /* Services */
 .service-container{
-  padding: 10%;
-  
+  padding: 5% 10% 5% 10%; 
 }
 
 .service-container .head{
@@ -94,7 +93,7 @@
 
 /* image gallery */
 .image-container{
-  padding: 5%;
+  padding-top: 5% ;
 }
 
 .image-container .head{
@@ -347,17 +346,13 @@ hr{
 
 /* Get In Touch */
 .get-in-touch{
-  padding-top: 20rem;
+  padding: auto;
 }
-@media screen and (max-width: 1088px){
-  .get-in-touch{
-    padding-top: 20rem;
-  }
-}
+
 
 @media screen and (max-width: 735px){
   .get-in-touch{
-    padding-top: 25rem;
+    padding-top: 1rem;
   }
 }
 .contact-form{
@@ -369,13 +364,14 @@ hr{
   justify-content: center;
   align-items: center;
   background-color: rgba(202, 217, 226, 0.151);
-  padding-top: 3rem;
-  padding-bottom: 3rem;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
 }
 .contact-form .c-btn{
   color: rgb(19, 125, 224);
   border: none;
   padding: 9px;
+  margin-bottom: 10px;
   border-radius: 20px;
   font-weight: 800;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;}
@@ -407,16 +403,21 @@ hr{
   margin: 10px;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
 }
-.contact-form .msg-input{
-  height: 40px;
-  
-}
+
 .input-form{
-  width: 90%;
+  width: 50%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
-
+.input-form .i-second{
+  display: flex;
+}
+@media (max-width:735px) {
+  .input-form .i-second input{
+    padding: 2%;
+    width: 11rem;
+  }
+}
 /* features */

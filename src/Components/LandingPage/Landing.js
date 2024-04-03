@@ -115,7 +115,7 @@ const Landing = () => {
       </div>
     
       {/* Get in touch */}
-      {/* <div className='get-in-touch'>
+      <div className='get-in-touch'>
         <form className='contact-form'>
             <button className='c-btn'>CONTACTS</button>
             <h1>Get In Touch Now</h1>
@@ -127,13 +127,6 @@ const Landing = () => {
                   type='text'
                   className='f-input'
                   placeholder='First name'
-                  value=''
-                  src=''
-                  onChange={''}/>
-                <input
-                  type='text'
-                  className='f-input'
-                  placeholder='Last name'
                   value=''
                   src=''
                   onChange={''}/>
@@ -168,7 +161,7 @@ const Landing = () => {
               <button className='f-btn'>Send Request</button>
             </div>
         </form>
-      </div> */}
+      </div>
 
       
       <Footer />
