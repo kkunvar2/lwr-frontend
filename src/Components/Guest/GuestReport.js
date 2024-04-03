@@ -10,7 +10,7 @@ const GuestReport = () => {
 
     const fetchData = async() => {
         try {
-            const response = await axios.get(`http://localhost:8081/lwresident/v1/guest/viewUser`)
+            const response = await axios.get(`http://localhost:8081/lwresident/v1/guest/view-checkIn`)
             setguest(response.data)
             
         } catch (error) {

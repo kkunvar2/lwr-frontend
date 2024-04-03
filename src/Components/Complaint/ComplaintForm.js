@@ -16,7 +16,7 @@ const ComplaintForm = () => {
         e.preventDefault()
         try {
             const token = localStorage.getItem('token')
-            const response = await fetch('http://localhost:8081/lwresident/v1/complaint/register-complaint', {
+            const response = await fetch('http://localhost:8081/lwresident/v1/complaint/newComplaint', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

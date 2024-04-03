@@ -112,7 +112,7 @@ const handleLogout = () =>{
                             </div>
                             <div className='flex flex-col text-sm gap-2'>    
                                 <label>Email:</label>
-                                <input className='bg-slate-100 rounded-md h-7 p-2'
+                                <input disabled className='bg-slate-100 rounded-md h-7 p-2'
                                     type='email'
                                     name='email'
                                     value={userData.email}

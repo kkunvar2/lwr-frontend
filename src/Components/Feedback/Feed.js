@@ -14,7 +14,7 @@ const Feed = () => {
 
         console.log(feed);
         
-        const response = await fetch('http://localhost:8081/lwresident/v1/auth/feedback',{
+        const response = await fetch('http://localhost:8081/lwresident/v1/feedback/submit',{
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(feed)

@@ -32,7 +32,7 @@ const  CreateMeetings = () => {
 
     console.log(values);
     //submit meeting
-    await axios.post('http://localhost:8081/lwresident/v1/meetings/raiseMeeting', values, {
+    await axios.post('http://localhost:8081/lwresident/v1/meetings/create', values, {
       headers: {
         'Authorization': `Bearer ${token}` 
       }
@@ -53,7 +53,7 @@ const  CreateMeetings = () => {
     //get meetings
     const fetchMeetings = async () => {
       const token = localStorage.getItem('token')
-      await axios.get('http://localhost:8081/lwresident/v1/meetings/view',{
+      await axios.get('http://localhost:8081/lwresident/v1/meetings/view-all',{
           headers: {
               'Authorization': `Bearer ${token}` 
             }
@@ -78,7 +78,7 @@ const  CreateMeetings = () => {
   const handleConclusion = async() => {
     try {
       const token = localStorage.getItem('token')
-      const response = await axios.post('http://localhost:8081/lwresident/v1/updateconclusion/', {conclusion: values.conclusion}, {
+      const response = await axios.post('http://localhost:8081/lwresident/v1/updateConclusion/id', {conclusion: values.conclusion}, {
         headers:{
           'Authorization': `Bearer ${token}`
         }
@@ -95,7 +95,7 @@ const  CreateMeetings = () => {
   //delete
   const handleDelete = async(id) => {
     const token = localStorage.getItem('token');
-     await axios.delete(`http://localhost:8081/lwresident/v1/meetings/deleteMeeting/${id}`, {
+     await axios.delete(`http://localhost:8081/lwresident/v1/meetings/delete/${id}`, {
       headers:{
         'Authorization': `Bearer ${token}`
       }

@@ -9,7 +9,7 @@ const GuestRecords = () => {
     const [guest, setguest] = useState([])
     const fetchData = async() =>{
         try {
-            const response = await axios.get(`http://localhost:8081/lwresident/v1/guest/viewVisitors`)
+            const response = await axios.get(`http://localhost:8081/lwresident/v1/guest/view-visitors`)
             setguest(response.data)
             }
         catch (error) {

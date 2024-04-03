@@ -13,7 +13,7 @@ const Approval = () => {
     //Fetched user Data
     const fetchedData = async() => {
         const token = localStorage.getItem('token')
-        await axios.get('http://localhost:8081/lwresident/v1/admin/view-requests', {
+        await axios.get('http://localhost:8081/lwresident/v1/admin/requests', {
             headers:{
                 'Authoization': `Bearer ${token}`
             } 
@@ -30,7 +30,7 @@ const Approval = () => {
     const handleAccept = () => {
         try{
             const token = localStorage.getItem('token')
-            const response = axios.patch('http://localhost:8081/lwresident/v1/accept',{
+            const response = axios.patch('http://localhost:8081/lwresident/v1/admin/requests/approve/id',{
                 headers:{
                     'Authoization': `Bearer ${token}`
                 } 
@@ -48,7 +48,7 @@ const Approval = () => {
     const handleReject = () => {
         try{
             const token = localStorage.getItem('token')
-            const response = axios.patch('http://localhost:8081/lwresident/v1/admin/reject',{
+            const response = axios.patch('http://localhost:8081/lwresident/v1/admin/requests/decline/id',{
                 headers:{
                     'Authoization': `Bearer ${token}`
                 } 

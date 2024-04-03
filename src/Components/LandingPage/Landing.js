@@ -126,7 +126,8 @@ const Landing = () => {
                 <input
                   type='text'
                   className='f-input'
-                  placeholder='First name'
+                  placeholder='Fullname'
+                  name='fullname'
                   value=''
                   src=''
                   onChange={''}/>
@@ -138,6 +139,7 @@ const Landing = () => {
                   className='f-input'
                   placeholder='Email address'
                   value=''
+                  name='email'
                   src=''
                   onChange={''}/>
                 <input
@@ -145,6 +147,7 @@ const Landing = () => {
                   className='f-input'
                   placeholder='Phone Number'
                   value=''
+                  name='mobile'
                   onChange={''}/>
               </div>
               <div>
@@ -153,6 +156,7 @@ const Landing = () => {
                   className='msg-input'
                   placeholder='Your message'
                   value=''
+                  name='message'
                   src=''
                   onChange={''}/>
               </div>

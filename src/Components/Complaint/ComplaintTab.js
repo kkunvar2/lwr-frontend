@@ -13,7 +13,7 @@ const ComplaintTab = () => {
 
     useEffect(() => {
       const token = localStorage.getItem('token');
-      fetch('http://localhost:8081/lwresident/v1/complaint/view-complaints', {
+      fetch('http://localhost:8081/lwresident/v1/complaint/my-complaints', {
         headers: {
           'Authorization': `Bearer ${token}` 
         }

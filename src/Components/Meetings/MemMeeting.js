@@ -9,7 +9,7 @@ const MemMeeting = () => {
 
     const fetchMeetings = async () => {
             const token = localStorage.getItem('token')
-            await axios.get('http://localhost:8081/lwresident/v1/meetings/view',{
+            await axios.get('http://localhost:8081/lwresident/v1/meetings/view-all',{
                 headers: {
                     'Authorization': `Bearer ${token}` 
                   }
