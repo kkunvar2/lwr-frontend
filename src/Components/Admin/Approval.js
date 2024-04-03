@@ -27,17 +27,17 @@ const Approval = () => {
     },[])
 
     //Accept
-    const handleAccept = () => {
+    const handleAccept = (id) => {
         try{
             const token = localStorage.getItem('token')
-            const response = axios.patch('http://localhost:8081/lwresident/v1/admin/requests/approve/id',{
+            const response = axios.patch(`http://localhost:8081/lwresident/v1/admin/requests/approve/${id}`,{
                 headers:{
                     'Authoization': `Bearer ${token}`
                 } 
             })
             if(response.ok){
                console.log("Approval Accepted Successfully")
-               window.location.reload(true)
+               window.location.reload(false)
             }
         }catch(err){
             console.log("Can't Accepted")
@@ -45,17 +45,17 @@ const Approval = () => {
     }
 
     //Reject
-    const handleReject = () => {
+    const handleReject = (id) => {
         try{
             const token = localStorage.getItem('token')
-            const response = axios.patch('http://localhost:8081/lwresident/v1/admin/requests/decline/id',{
+            const response = axios.patch(`http://localhost:8081/lwresident/v1/admin/requests/decline/${id}`,{
                 headers:{
                     'Authoization': `Bearer ${token}`
                 } 
             })
             if(response.ok){
                console.log("Approval Rejected Successfully")
-               window.location.reload(true)
+               window.location.reload(false)
             }
         }catch(err){
             console.log("Can't Rejected")

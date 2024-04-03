@@ -47,6 +47,7 @@ const  CreateMeetings = () => {
         time: ''
 
       });
+      window.location.reload(false)
       console.log("Meeting Scheduled submited successfully");
     })
     .catch(err => console.log('Failed to submit', err));
@@ -54,7 +55,6 @@ const  CreateMeetings = () => {
 
     //get meetings
     const fetchMeetings = async () => {
-      
       const token = localStorage.getItem('token')
       await axios.get('http://localhost:8081/lwresident/v1/meetings/view-all',{
           headers: {
@@ -63,7 +63,7 @@ const  CreateMeetings = () => {
       })
       .then((res) => {
           setmeetings(res.data);
-          console.log(res.data);       
+          console.log(res.data); 
       })    
       .catch((error)=> {
           console.error('Error fetching meetings:', error);
@@ -79,21 +79,23 @@ const  CreateMeetings = () => {
 
   //Conclusion
   const handleConclusion = async() => {
-    try {
       const token = localStorage.getItem('token')
-      const response = await axios.post('http://localhost:8081/lwresident/v1/updateConclusion/id', {conclusion: values.conclusion}, {
+      await axios.post('http://localhost:8081/lwresident/v1/updateConclusion/id', {conclusion: values.conclusion}, {
         headers:{
           'Authorization': `Bearer ${token}`
         }
-      });
-      if(response.ok){
+      })
+      .then((res) => {
         setconclusion(true)
+        setloading(true)
         console.log('Conclusion Submited Successfully')
-      }
-    } catch (error) {
-      console.log("Failed to submitted")
+      })
+      .catch((err) => {
+        console.log("cant submited");
+      })
+      
     }
-  }
+    
 
   //delete
   const handleDelete = async(id) => {
@@ -105,16 +107,13 @@ const  CreateMeetings = () => {
      })
     .then(res => {
       setmeetings(meetings.filter(meet => meet.id !== id))
+      window.location.reload(false)
     })
   }
  
   return (
     <>
       <div>
-        {loading && 
-        <div className='h-screen bg-gray-600 opacity-10 flex justify-center items-center'>
-          <p className='text-2xl font-semibold tracking-wider text-yellow-400'>Waiting for submission....</p>
-          </div>}
         <div className="flex flex-col lg:flex-row bg-gray-300 min-h-screen">
             <Sidebar />
             {/* Main Panel */}
@@ -246,6 +245,11 @@ const  CreateMeetings = () => {
                           </div>
                           </div>
                         )} 
+
+                    {loading && 
+                            <div className='absolute top-0 left-0 w-full h-full flex items-center justify-center bg-gray-900 bg-opacity-50'>
+                              <p className='text-2xl font-semibold tracking-wider text-yellow-400'>Waiting for submission....</p>
+                              </div>}
                   </div>
              </div>
           </div>

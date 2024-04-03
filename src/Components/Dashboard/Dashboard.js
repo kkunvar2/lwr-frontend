@@ -12,7 +12,7 @@ const Dashboard = () => {
     <Nav/>
    </div>
     <div className=' flex items-center justify-center flex-col pb-6'>
-            <h1 className='text-5xl font-bold mt-10 text-slate-400'>Welcome ahiya user name aavu joye User ni jagya a</h1>
+            <h1 className='text-5xl font-bold mt-10 text-slate-400'>Welcome User</h1>
             <div className='grid sm:grid-cols-2 grid-cols-1 mt-12 gap-10 '>
                 <Link to='/memMaintanance'>
                     <div className='flex flex-col bg-white w-72 cursor-pointer h-36 p-3 sm:w-[24rem] items-center justify-around rounded-md shadow-xl'>
