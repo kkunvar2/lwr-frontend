@@ -5,9 +5,15 @@ import { FaCar } from "react-icons/fa";
 import { GiPoliceOfficerHead } from "react-icons/gi";
 import { MdCelebration, MdLibraryBooks } from "react-icons/md";
 
+// Images
+import club from '../Assests/clubhouse.jpg'
+import garden from '../Assests/garden.jpg'
+import resident from '../Assests/bgImage.jpg'
+import gym from '../Assests/gym.jpg'
+import temple from '../Assests/temple.jpg'
+import pool from '../Assests/swim.jpeg'
+import play from '../Assests/playground.jpg'
 
-//icons
-// import phone from "../Assets/phone.png"
 
 import Nav from '../Nav';
 import { Link } from 'react-router-dom';
@@ -29,7 +35,10 @@ const Landing = () => {
 
       {/* Services */}
       <div className='service-container'>
-        <h1 className=''>Our services</h1>
+        <div className='head'>
+          <h1 className=''>Our services</h1>
+          <p className='underline'></p>
+        </div>
         <div className='row'>
           <div className='service'>
             <FaCar fontSize="40px" markerEnd='10px'/>
@@ -53,11 +62,60 @@ const Landing = () => {
           </div>
         </div>
       </div>
-      {/* Features */}
-      
+
+      {/* Image gallery */}
+      <div className='image-container'>
+        <div className='head'>
+          <h1 className=''>Image Gallery</h1>
+          <p className='underline'></p>
+        </div>
+        <div className='images'> 
+        <div className='photo-gallery'>
+          
+          <div className='column'>
+            <div className='photo'>
+              <img src={club}/>
+              <div className='text'>
+                <p>Clubhouse</p>
+              </div>
+            </div>
+            <div className='photo'>
+              <img src={play}/>
+              <div className='text'>
+                <p>Play Ground</p>
+              </div>
+            </div>
+            <div className='photo'>
+              <img src={garden}/>
+              <div className='text'>
+                <p>Garden</p>
+              </div>
+            </div>
+          </div>
+
+          <div className='column'>
+            <div className='photo'>
+              <img src={gym}/>
+              <div className='text'>
+                <p>Gym</p>
+              </div>
+            </div>
+            <div className='photo'>
+              <img src={temple}/>
+              <div className='text'>
+                <p>Temple</p>
+              </div>
+            </div>
+          
+          </div>
+
+        </div>
+      </div>
+        
+      </div>
     
       {/* Get in touch */}
-      <div className='get-in-touch'>
+      {/* <div className='get-in-touch'>
         <form className='contact-form'>
             <button className='c-btn'>CONTACTS</button>
             <h1>Get In Touch Now</h1>
@@ -95,7 +153,6 @@ const Landing = () => {
                   placeholder='Phone Number'
                   value=''
                   onChange={''}/>
-                  {/* <img src={phone}/> */}
               </div>
               <div>
               <input
@@ -111,7 +168,7 @@ const Landing = () => {
               <button className='f-btn'>Send Request</button>
             </div>
         </form>
-      </div>
+      </div> */}
 
       
       <Footer />

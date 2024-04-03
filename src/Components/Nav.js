@@ -17,9 +17,9 @@ const Nav = () => {
   return (
     <>
            
-                <Navbar fluid rounded className='sticky top-0 shadow-lg py-1'>
-                    <Navbar.Brand href="https://localhost:3000/">
-                        <span className="self-center whitespace-nowrap text-xl font-bold dark:text-white">LW Residential</span>
+                <Navbar fluid rounded className='sticky top-0 shadow-lg py-1 ' style={{ zIndex: 100 }}>
+                    <Navbar.Brand >
+                        <span className="self-center text-blue-500 whitespace-nowrap text-xl font-bold ">LW Residential</span>
                     </Navbar.Brand>
                     <div className="flex md:order-2 item-center">
                         {!isLog && 
@@ -48,10 +48,8 @@ const Nav = () => {
                     </div>
                     <Navbar.Collapse className='pt-3'>
                             <Link to='/'>
-                                    <Navbar.Link  active className='ml-12 bg-blue-500'>Home</Navbar.Link>                                                    
+                                    <Navbar.Link  active className=' bg-blue-500'>Home</Navbar.Link>                                                    
                             </Link>
-
-
                             <Navbar.Link href="#">About</Navbar.Link>
                             <Navbar.Link href="#">Contact</Navbar.Link>
                             <Link to='/dash'>
