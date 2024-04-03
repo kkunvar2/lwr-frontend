@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 const  CreateMeetings = () => {
 
   const [success, setsuccess] = useState(false)
+  const [loading, setloading] = useState(false)
   const [meetings, setmeetings] = useState([])
   const [conclusion, setconclusion] = useState(false)
   const [values, setvalues] = useState({
@@ -27,7 +28,7 @@ const  CreateMeetings = () => {
 
   const handleSubmit = async(e) => {
     e.preventDefault()
-
+    setloading(true)
     const token = localStorage.getItem('token')
 
     console.log(values);
@@ -39,6 +40,7 @@ const  CreateMeetings = () => {
     })
     .then((res) => {
       setsuccess(true)
+      setloading(false)
       setvalues({
         agenda: '',
         date: '',
@@ -52,6 +54,7 @@ const  CreateMeetings = () => {
 
     //get meetings
     const fetchMeetings = async () => {
+      
       const token = localStorage.getItem('token')
       await axios.get('http://localhost:8081/lwresident/v1/meetings/view',{
           headers: {
@@ -84,7 +87,7 @@ const  CreateMeetings = () => {
         }
       });
       if(response.ok){
-        setconclusion(false)
+        setconclusion(true)
         console.log('Conclusion Submited Successfully')
       }
     } catch (error) {
@@ -108,6 +111,10 @@ const  CreateMeetings = () => {
   return (
     <>
       <div>
+        {loading && 
+        <div className='h-screen bg-gray-600 opacity-10 flex justify-center items-center'>
+          <p className='text-2xl font-semibold tracking-wider text-yellow-400'>Waiting for submission....</p>
+          </div>}
         <div className="flex flex-col lg:flex-row bg-gray-300 min-h-screen">
             <Sidebar />
             {/* Main Panel */}
@@ -153,7 +160,7 @@ const  CreateMeetings = () => {
                       </div>
 
                       <div className='p-2 flex justify-between items-center'>
-                        {success && 
+                        {success &&
                         <div className=' bg-gray-300 shadow-inner p-1 rounded-md font-semibold text-lg text-green-500 tracking-wide outlinr'>Meeting Scheduled</div>}
                         <div></div>
                         <button className='p-3 bg-yellow-400 hover:bg-slate-800 text-white font-medium shadow-xl rounded-md'
