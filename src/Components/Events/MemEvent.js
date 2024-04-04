@@ -17,44 +17,53 @@ const MemEvent = () => {
   //Getting Today
   const today = new Date().toISOString().split('T')[0];
 
-
+  //Submit
   const handleSubmit = (e) => {
     e.preventDefault()
-    try {
-      // Calculate total day
-      // const start = new Date(values.startDate);
-      // const end = new Date(values.endDate);
-      // const diffTime = Math.abs(end - start);
-      // const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24) + 1);  
-
       axios.post('http://localhost:8081/lwresident/v1/events/newEvent', values)
-        .then((res) => {
-          // setvalues(values)
+        
+      .then((res) => {
           console.log('submited', res);
+          setvalues({
+            ...values,
+              type: '',
+          })
           console.log(values)
         })
-
-
-
-    } catch (error) {
-      console.log("Didin't Submited Data");
-    }
-
-    // Update state with total days
-    // setvalues({
-    //   ...values,
-    //   totalDays: diffDays,
-    //   book: values.check && values.type !== '' && values.startDate !== '' && values.endDate !== '', //if empty getting disabled automatically
-    //   type: '',
-
-    // });  
-
+       .catch (error => console.log("Didn't submited"));
   }
+
   //Check Avaibility
   const handleCheck = async (e) => {
     e.preventDefault()
     const token = localStorage.getItem("token")
-    await axios.post('http://localhost:8081/lwresident/v1/events/check-bookings',null,
+
+     // Calculate total day
+      const start = new Date(values.dateFrom);
+      const end = new Date(values.dateTo);
+      const diffTime = Math.abs(end - start);
+      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24) + 1);
+      
+      
+      // Update state with total days
+      setvalues({
+        ...values,
+        totalDays: diffDays,
+        
+      }); 
+      
+      //Field empty
+      const empty = values.type !== '' && values.dateFrom !== '' && values.dateTo !== '';
+      if (empty) {
+        setvalues((values) => ({
+          ...values,
+          check: false,
+          book: false,
+        }));
+        return; 
+      }
+      
+      await axios.post('http://localhost:8081/lwresident/v1/events/check-bookings',null,
         {
           params: {
             dateFrom: values.dateFrom,
@@ -67,29 +76,31 @@ const MemEvent = () => {
           }
         })
         .then((res) => {
-        console.log('Booking available');
+            console.log('Booking available');
+            setvalues({
+              ...values,
+              check: true,
+              book: true
+            })
+          
         })
-        .catch(err => console.log("booking full"))
-      };
-      
-    //   if(response.OK) {
-    //   setvalues({
-    //     ...values,
-    //     check: !response.data.true,
-    //     book: values.check,
-    //   })
-    // }
-    
-    // console.log('Booking available');
-  const handlechange = (e) => {
-    const { name, value } = e.target;
-    setvalues({
-      ...values,
-      [name]: value,
-    });
-  }
+        .catch((err) => {
+          console.log("Booking full")
+            setvalues({
+              ...values,
+              check: false,
+              book: false,
+            })
+        })
+      }
 
-
+      const handlechange = (e) => {
+        const { name, value } = e.target;
+        setvalues({
+          ...values,
+          [name]: value,
+        });
+      }
 
   return (
     <>
@@ -182,8 +193,8 @@ const MemEvent = () => {
         </div>
       </section>
     </>
-  )
+    )
+  
 }
-
 
 export default MemEvent
