@@ -44,6 +44,15 @@ const Sidebar = () => {
               <MdSpaceDashboard className="w-5 h-5 text-black " />
             </div>
             <div
+              className="flex items-center justify-between py-3 px-2 transform transition duration-200 hover:scale-105 hover:bg-gray-400 hover:rounded-2xl "
+              onClick={handelDashboard}
+            >
+              <button className="ml-2 text-gray-400 hover:text-white ">
+                Members
+              </button>
+              <MdSpaceDashboard className="w-5 h-5 text-black " />
+            </div>
+            <div
               className="flex items-center justify-between py-3 px-2 transform transition duration-200 hover:scale-105 hover:bg-gray-400 hover:rounded-2xl"
               onClick={handelApproval}
             >
