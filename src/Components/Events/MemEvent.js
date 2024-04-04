@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useState } from 'react'
 
 const MemEvent = () => {
@@ -6,8 +7,8 @@ const MemEvent = () => {
 
   const [values, setvalues] = useState({
     type: '',
-    startDate: '',
-    endDate: '',
+    dateFrom: '',
+    dateTo: '',
     check: false,
     book: false
   })
@@ -19,33 +20,55 @@ const MemEvent = () => {
 
   const handleSubmit = (e) =>{
     e.preventDefault()
-
-    // Calculate total day
-    const start = new Date(values.startDate);
-    const end = new Date(values.endDate);
-    const diffTime = Math.abs(end - start);
-    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24) + 1);
-    
-    // Update state with total days
-      setvalues({
-        ...values,
-        totalDays: diffDays,
-        book: values.check && values.type !== '' && values.startDate !== '' && values.endDate !== '', //if empty getting disabled automatically
-        type: '',
-        
-      });
-
+    try{
+      // Calculate total day
+    // const start = new Date(values.startDate);
+    // const end = new Date(values.endDate);
+    // const diffTime = Math.abs(end - start);
+    // const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24) + 1);  
+      
+    axios.post('http://localhost:8081/lwresident/v1/events/newEvent', values)
+    .then((res) => {
+      // setvalues(values)
+      console.log('submited', res);
       console.log(values)
+    })
+
+    
+  
+  }catch(error){
+    console.log("Didin't Submited Data");
+  }
+    
+  // Update state with total days
+  // setvalues({
+  //   ...values,
+  //   totalDays: diffDays,
+  //   book: values.check && values.type !== '' && values.startDate !== '' && values.endDate !== '', //if empty getting disabled automatically
+  //   type: '',
+    
+  // });  
+  
 }
-
-  const handleCheck = () => {
-    // for getting book value true
-    setvalues({
-      ...values,
-      check: true
-    });
-
-
+  //Check Avaibility
+  const handleCheck = async(e) => {
+    e.preventDefault()
+    const token = localStorage.getItem("token")
+    await axios.post('http://localhost:8081/lwresident/v1/events/check-bookings', {...values, dateFrom: values.dateFrom},{
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    })
+    .then((res) => {
+        setvalues({
+          ...values,
+          check: !res.data.true,
+          book: values.check,
+        }) 
+        console.log('Booking available');
+    })
+    .catch(err => console.log("Checking failed"));
+    console.log(values.dateFrom);
   };
 
   const handlechange = (e) => {
@@ -103,9 +126,9 @@ return (
                 <label className="leading-7 text-lg font-normal mb-2 text-gray-400">Start Date:</label>
                 <input 
                     onChange={handlechange} 
-                    value={values.startDate}
+                    value={values.dateFrom}
                     type="date"  
-                    name="startDate" 
+                    name="dateFrom" 
                     min={today}
                     className="w-full 2xl:w-[20rem] xl:w-[12rem] bg-gray-600 bg-opacity-20 focus:bg-transparent focus:ring-2 focus:ring-yellow-900 rounded border border-gray-600 focus:border-yellow-500 text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
                 />
@@ -114,9 +137,9 @@ return (
                 <label className="leading-7 text-lg font-normal mb-2 text-gray-400">End date:</label>
                 <input 
                     onChange={handlechange} 
-                    value={values.endDate}
+                    value={values.dateTo}
                     type="date"  
-                    name="endDate"
+                    name="dateTo"
                     min={today} 
                     className="w-full 2xl:w-[20rem] xl:w-[12rem] bg-gray-600 bg-opacity-20 focus:bg-transparent focus:ring-2 focus:ring-yellow-900 rounded border border-gray-600 focus:border-yellow-500 text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
                 />

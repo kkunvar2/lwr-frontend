@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import "./Landing.css"
 import Footer from './Footer';
 import { FaCar } from "react-icons/fa";
 import { GiPoliceOfficerHead } from "react-icons/gi";
 import { MdCelebration, MdLibraryBooks } from "react-icons/md";
+
 
 // Images
 import club from '../Assests/clubhouse.jpg'
@@ -17,9 +18,37 @@ import play from '../Assests/playground.jpg'
 
 import Nav from '../Nav';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 
 const Landing = () => {
+  const [values, setvalues] = useState({
+    fullName: '',
+    mobile: '',
+    email: '',
+    message: ''
+  })
+
+  const handlechange = (e) => {
+    const {name, value} = e.target;
+    setvalues({
+      ...values,
+      [name]: value,
+    })
+  }
+
+  // post data 
+  const handlesubmit = (e) =>{
+    e.preventDefault()
+    axios.post('http://localhost:8081/lwresident/v1/contactus/submit', values)
+    .then((res) => {
+      // setvalues(values)
+      console.log('submited', res);
+    })
+    .catch(err => console.log("failed to submit"));
+  }
+
+  
   return (
     <>
     {/* navbar */}
@@ -116,7 +145,7 @@ const Landing = () => {
     
       {/* Get in touch */}
       <div className='get-in-touch'>
-        <form className='contact-form'>
+        <form onSubmit={handlesubmit} className='contact-form'>
             <button className='c-btn'>CONTACTS</button>
             <h1>Get In Touch Now</h1>
             <h4>We have Developed unique space where you can work and live with your family.</h4>
@@ -127,10 +156,10 @@ const Landing = () => {
                   type='text'
                   className='f-input'
                   placeholder='Fullname'
-                  name='fullname'
-                  value=''
+                  name='fullName'
+                  value={values.fullName}
                   src=''
-                  onChange={''}/>
+                  onChange={handlechange}/>
               </div>
               
               <div className='i-second'>
@@ -138,31 +167,32 @@ const Landing = () => {
                   type='email'
                   className='f-input'
                   placeholder='Email address'
-                  value=''
+                  value={values.email}
                   name='email'
                   src=''
-                  onChange={''}/>
+                  onChange={handlechange}/>
                 <input
                   type='tel'
                   className='f-input'
                   placeholder='Phone Number'
-                  value=''
+                  value={values.mobile}
                   name='mobile'
-                  onChange={''}/>
+                  onChange={handlechange}/>
               </div>
               <div>
               <input
                   type='textarea'
                   className='msg-input'
                   placeholder='Your message'
-                  value=''
+                  value={values.message}
                   name='message'
                   src=''
-                  onChange={''}/>
+                  onChange={handlechange}/>
               </div>
             </div>
             <div>
-              <button className='f-btn'>Send Request</button>
+              <button className='f-btn'
+                    type='submit'>Send Request</button>
             </div>
         </form>
       </div>
