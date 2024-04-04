@@ -21,6 +21,10 @@ const Sidebar = () => {
         navigate('/createmeeting')
     }
 
+    const handelMembers = () => {
+      navigate('/users')
+    }
+
     const handelNavigation = () => {
       logoutUser();
       navigate('/log')
@@ -45,7 +49,7 @@ const Sidebar = () => {
             </div>
             <div
               className="flex items-center justify-between py-3 px-2 transform transition duration-200 hover:scale-105 hover:bg-gray-400 hover:rounded-2xl "
-              onClick={handelDashboard}
+              onClick={handelMembers}
             >
               <button className="ml-2 text-gray-400 hover:text-white ">
                 Members

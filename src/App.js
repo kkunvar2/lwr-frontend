@@ -18,6 +18,7 @@ import Profile from './Components/Profile'
 import AdminDashboard from './Components/Admin/AdminDashboard'
 import Approval from './Components/Admin/Approval'
 import SecMeetings from './Components/Admin/CreateMeetings'
+import Users from './Components/Admin/Users'
 
 
 const App = () => {
@@ -42,6 +43,7 @@ const App = () => {
         {/* Admin */}
         <Route path='/admindashboard' element={<AdminDashboard />}/>
         <Route path='/approval' element={<Approval />}/>
+        <Route path='users' element={<Users/>}/>
         
         {/* Landing Page */}
         <Route path='/' element={<Landing />}/>

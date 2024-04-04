@@ -35,64 +35,60 @@ const MemEvent = () => {
 
   //Check Avaibility
   const handleCheck = async (e) => {
-    e.preventDefault()
-    const token = localStorage.getItem("token")
-
-     // Calculate total day
-      const start = new Date(values.dateFrom);
-      const end = new Date(values.dateTo);
-      const diffTime = Math.abs(end - start);
-      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24) + 1);
-      
-      
-      // Update state with total days
-      setvalues({
-        ...values,
-        totalDays: diffDays,
-        
-      }); 
-      
-      //Field empty
-      const empty = values.type !== '' && values.dateFrom !== '' && values.dateTo !== '';
-      if (empty) {
-        setvalues((values) => ({
-          ...values,
-          check: false,
-          book: false,
-        }));
-        return; 
-      }
-      
-      await axios.post('http://localhost:8081/lwresident/v1/events/check-bookings',null,
-        {
-          params: {
-            dateFrom: values.dateFrom,
-            dateTo: values.dateTo
-          }
+    e.preventDefault();
+    const token = localStorage.getItem("token");
+  
+    // Calculate total day
+    const start = new Date(values.dateFrom);
+    const end = new Date(values.dateTo);
+    const diffTime = Math.abs(end - start);
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24) + 1);
+  
+    // Update state with total days
+    setvalues((prevValues) => ({
+      ...prevValues,
+      totalDays: diffDays,
+    }));
+  
+    // Field empty
+    const empty = values.type !== '' && values.dateFrom !== '' && values.dateTo !== '';
+    if (!empty) {
+      setvalues((prevValues) => ({
+        ...prevValues,
+        check: false,
+        book: false,
+      }));
+      return;
+    }
+  
+    try {
+      await axios.post('http://localhost:8081/lwresident/v1/events/check-bookings', null, {
+        params: {
+          dateFrom: values.dateFrom,
+          dateTo: values.dateTo
         },
-        {
-          headers: {
-            'Authorization': `Bearer ${token}`
-          }
-        })
-        .then((res) => {
-            console.log('Booking available');
-            setvalues({
-              ...values,
-              check: true,
-              book: true
-            })
-          
-        })
-        .catch((err) => {
-          console.log("Booking full")
-            setvalues({
-              ...values,
-              check: false,
-              book: false,
-            })
-        })
-      }
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+      
+      console.log('Booking available');
+      setvalues((values) => ({
+        ...values,
+        check: true,
+        book: true
+      }));
+      
+    } catch (error) {
+      console.log("Booking full");
+      setvalues((values) => ({
+        ...values,
+        check: false,
+        book: false,
+      }));
+    }
+  };
+  
 
       const handlechange = (e) => {
         const { name, value } = e.target;
@@ -101,7 +97,6 @@ const MemEvent = () => {
           [name]: value,
         });
       }
-
   return (
     <>
       <section className=' bg-gray-900 h-auto md:h-screen'>
