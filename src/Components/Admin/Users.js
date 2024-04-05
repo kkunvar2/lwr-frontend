@@ -5,7 +5,7 @@ import profile from '../Assests/user.png'
 
 
 const Users = () => {
-    const roles = ["Member", "Secretary", "Committee"];
+    const roles = ["MEMBER", "SECRETORY", "COMMITTEE"];
 
     const [users, setusers] = useState([])
     const [confirm, setconfirm] = useState(false)
@@ -25,7 +25,7 @@ const Users = () => {
 
     const handleRemove = async(id) => {
         const token = localStorage.getItem('token');
-        await axios.delete(`http://localhost:8081/lwresident/v1/${id}`, {
+        await axios.delete(`http://localhost:8081/lwresident/v1/admin/delete-member/${id}`, {
         headers:{
             'Authorization': `Bearer ${token}`
         }

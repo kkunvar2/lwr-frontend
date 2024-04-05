@@ -12,7 +12,7 @@ const AllBookings = () => {
 
     const fetchData = async() =>{
         try {
-            const response = await axios.get(`http://localhost:8081/lwresident/v1/`)
+            const response = await axios.get(`http://localhost:8081/lwresident/v1/events/view-all`)
             setbookings(response.data)
             }
         catch (error) {
@@ -27,7 +27,7 @@ const AllBookings = () => {
     //Cancle Events
     const cancelEvent = async(id) =>{   
         const token = localStorage.getItem('token')
-        await axios.delete(`http://localhost:8081/lwresident/v1/${id}`, {
+        await axios.delete(`http://localhost:8081/lwresident/v1/events/delete/${id}`, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
@@ -73,22 +73,22 @@ const AllBookings = () => {
                                 </tr>
                             </thead>
                             <tbody className="bg-slate-200">
-                                {/* {filterBooking.map((book, index) => (
+                                {filterBooking.map((book, index) => (
                                     <tr key={index} className="border-b hover:bg-slate-300">
                                         <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                            {book.id}
+                                            {book.funcid}
                                         </td>
                                         <td className="px-6 py-4">{book.funcType}</td>
-                                        <td className="px-6 py-4">{name}</td>
+                                        <td className="px-6 py-4">{book.name}</td>
                                         <td className="px-6 py-4">{moment(book.dateFrom).format('YYYY-MM-DD')}</td>
                                         <td className="px-6 py-4">{moment(book.dateTo).format('YYYY-MM-DD')}</td>
                                         <td className="px-6 py-4">
                                             <MdDeleteForever className='text-red-700 w-6 h-6' 
-                                                            onClick={() => cancelEvent(book.id)} />
+                                                            onClick={() => cancelEvent(book.funcid)} />
                                         </td>
                                     </tr>
-                                ))} */}
-                                <tr className="border-b  hover:bg-slate-300 text-">
+                                ))}
+                                {/* <tr className="border-b  hover:bg-slate-300 text-">
                                         <td className="px-6 py-4 font-semibold text-gray-900 whitespace-nowrap dark:text-white">
                                             <p className=' text-gray-900 text-lg rounded-full'>12</p>
                                         </td>
@@ -100,7 +100,7 @@ const AllBookings = () => {
                                             <MdDeleteForever className='text-red-700 w-6 h-6' 
                                                             onClick={() => cancelEvent()} />
                                         </td>
-                                    </tr>
+                                    </tr> */}
                             </tbody>
                         </table>
                     </div>
