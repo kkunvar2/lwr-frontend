@@ -39,37 +39,37 @@ const Sidebar = () => {
           </div>
           <div className='lg:w-48 flex flex-col ml-3 text-md'>
             <div
-              className="flex items-center justify-between py-3 px-2 transform transition duration-200 hover:scale-105 hover:bg-gray-400 hover:rounded-2xl "
+              className="flex items-center justify-between py-3 px-2 transform transition duration-200 hover:scale-105  text-gray-400 hover:text-white hover:bg-gray-400 hover:rounded-2xl rounded-2xl"
               onClick={handelDashboard}
             >
-              <button className="ml-2 text-gray-400 hover:text-white ">
+              <button className="ml-2 ">
                 Dashboard
               </button>
               <MdSpaceDashboard className="w-5 h-5 text-black " />
             </div>
             <div
-              className="flex items-center justify-between py-3 px-2 transform transition duration-200 hover:scale-105 hover:bg-gray-400 hover:rounded-2xl "
+              className="flex items-center justify-between py-3 px-2 transform transition duration-200 hover:scale-105  text-gray-400 hover:text-white hover:bg-gray-400 hover:rounded-2xl rounded-2xl "
               onClick={handelMembers}
             >
-              <button className="ml-2 text-gray-400 hover:text-white ">
+              <button className="ml-2 ">
                 Members
               </button>
               <MdSpaceDashboard className="w-5 h-5 text-black " />
             </div>
             <div
-              className="flex items-center justify-between py-3 px-2 transform transition duration-200 hover:scale-105 hover:bg-gray-400 hover:rounded-2xl"
+              className="flex items-center justify-between py-3 px-2 transform transition duration-200 hover:scale-105 text-gray-400 hover:text-white hover:bg-gray-400 hover:rounded-2xl rounded-2xl"
               onClick={handelApproval}
             >
-              <button className="ml-2 text-gray-400 hover:text-white">
+              <button className="ml-2 ">
                 Confirm Approval
               </button>
               <FaUser className="ml-2 w-5 h-5 text-black " />
             </div>
             <div
-              className="flex items-center justify-between py-3 px-2 transform transition dublack00 hover:scale-105 hover:bg-gray-400 hover:rounded-2xl  "
+              className="flex items-center justify-between py-3 px-2 transform transition dublack00 hover:scale-105 ease-out text-gray-400 hover:text-white hover:bg-gray-400 hover:rounded-2xl rounded-2xl "
               onClick={handelMeetings}
             >
-              <button className="ml-2 text-gray-400 hover:text-white">
+              <button className="ml-2 ">
                 Arrange Meetings
               </button>
               <FaBoxOpen className=" w-5 h-5 text-black " />

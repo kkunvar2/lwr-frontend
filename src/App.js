@@ -19,6 +19,8 @@ import AdminDashboard from './Components/Admin/AdminDashboard'
 import Approval from './Components/Admin/Approval'
 import SecMeetings from './Components/Admin/CreateMeetings'
 import Users from './Components/Admin/Users'
+import AllBookings from './Components/Events/AllBookings'
+import ForgotPassword from './Components/Registration/ForgotPassword'
 
 
 const App = () => {
@@ -51,6 +53,7 @@ const App = () => {
         {/* Login & Signup*/}
         <Route path='/log' element={<Log />}/>
         <Route path='/register' element={<Register />}/>
+        <Route path='/forgotPassword' element={<ForgotPassword />}/>
 
         {/* Dashboard */}
         <Route path='/dash'  
@@ -71,6 +74,7 @@ const App = () => {
 
         {/* Event */}
         <Route path='/memevent' element={<MemEvent />}/>
+        <Route path='/allBookings' element={<AllBookings />}/>
 
         {/* Meetings */}
         <Route path='/memmeeting' element={<MemMeeting />}/>

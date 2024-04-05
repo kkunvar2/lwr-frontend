@@ -1,12 +1,31 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom';
+import axios from 'axios';
+
 //icons
 import { PiUsersBold } from "react-icons/pi";
-
 import { PiUsersThree } from "react-icons/pi";
 import Sidebar from './Sidebar';
 
 const AdminDashboard = () => {
 
+  const [count, setcount] = useState({
+    members: 0,
+    secretaries: 0
+  })
+
+  useEffect(() => {
+    axios.get('http://localhost:8081/lwresident/v1/auth/signup')
+    .then((res)=> {
+      const secretary = res.data.filter(user => user.role === 'SECRETARY');
+      const member = res.data.filter(user => user.role === 'MEMBER');
+
+      setcount({
+        members: member.length,
+        secretaries: secretary.length 
+      })
+    }).catch(err => console.log("fetching failed"))
+  },[])
   return (
     <>
     <div className="flex flex-col lg:flex-row bg-gray-300 min-h-screen">
@@ -26,7 +45,7 @@ const AdminDashboard = () => {
                   <h2 className='text-2xl'>Secrataries</h2>
                 </div>
                 <div className='text-5xl font-bold text-white'>
-                  3+
+                  {count.secretaries}+
                 </div>
               </div>
 
@@ -37,7 +56,7 @@ const AdminDashboard = () => {
                     <h2 className='text-2xl'>Members</h2>
                 </div>
                   <div className='text-5xl font-bold text-white'>
-                  12+
+                  {count.members}+
                 </div>
               </div>
 
@@ -47,7 +66,19 @@ const AdminDashboard = () => {
               </div> */}
 
               </div>
+
+              {/* users actions analysis */}
             </div>
+              <div className='grid grid-cols-2 gap-5 py-12 md:px-12'>
+                {/* Bookings */}
+                <Link to='/allBookings'>
+                  <div className='flex items-center bg-slate-50  rounded-md shadow-md hover:bg-slate-200'>
+                    <p className='bg-gray-400  text-gray-400 h-10 w-2 rounded-xl content-none' >.</p>
+                    <p className='ml-5 font-semibold tracking-widest text-blue-400'>Bookings</p>
+                  </div>
+                </Link>
+                
+              </div>
           </div>
         </div>
     </>

@@ -4,6 +4,11 @@ import React, { useState } from 'react'
 const MemEvent = () => {
 
   const events = ["Birthday", "Engagement", "Party"];
+  const [booking, setBooking] = useState({
+    eventFull: false,
+    eventAvailable: false,
+    success: false
+  })
 
   const [values, setvalues] = useState({
     funcType: '',
@@ -35,6 +40,11 @@ const MemEvent = () => {
               funcType: '',
               book: false,
           })
+          setBooking({...booking,success:true,})
+          setTimeout(()=> {
+            setBooking({...booking,success:true,})
+          },2000)
+
           console.log(values)
         })
        .catch (error => console.log("Didn't submited"));
@@ -79,7 +89,11 @@ const MemEvent = () => {
         }
       });
       
-      console.log('Booking available');
+      setBooking({...booking, eventAvailable:true})
+      setTimeout(() =>{
+        setBooking({...booking, eventAvailable:false})
+      },1000)
+
       setvalues((values) => ({
         ...values,
         check: true,
@@ -87,7 +101,11 @@ const MemEvent = () => {
       }));
       
     } catch (error) {
-      console.log("Booking full");
+      setBooking({...booking,eventFull:true,})
+        setTimeout(()=> {
+          setBooking({...booking,eventFull:false,})
+        },2000)
+
       setvalues((values) => ({
         ...values,
         check: false,
@@ -128,10 +146,10 @@ const MemEvent = () => {
                       return <option key={i} value={event} className='bg-gray-600 text-yellow-500'>{event}</option>
                     })
                   }
-                  <option className='bg-gray-600 text-white' value='Other'><input className='text-white' type='text' placeholder='Other' />Other</option>
+                  <option className='bg-gray-600 text-white' value='Other'> Other</option>
                 </select>
               </div>
-              {values.funcType === "Other" && ( // Conditionally render input box if "Other" is selected
+              {values.funcType === "Other" && ( 
                 <input
                   type="text"
                   placeholder='Enter other type'
@@ -160,8 +178,8 @@ const MemEvent = () => {
                 <label className="leading-7 text-lg font-normal mb-2 text-gray-400">End date:</label>
                 <input
                   onChange={handlechange}
-                  value={values.dateTo}
                   type="date"
+                  value={values.dateTo}
                   name="dateTo"
                   min={today}
                   className="w-full 2xl:w-[20rem] xl:w-[12rem] bg-gray-600 bg-opacity-20 focus:bg-transparent focus:ring-2 focus:ring-yellow-900 rounded border border-gray-600 focus:border-yellow-500 text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
@@ -184,7 +202,16 @@ const MemEvent = () => {
                   Book
                 </button>
               </div>
-
+              {booking.success &&
+              <p className='text-green-500'>Event booked Succcessfully</p>
+              }
+              {booking.eventAvailable &&
+              <p className='text-green-500'>Booking Available</p>
+              }
+              {booking.eventFull &&
+              <p className='text-red-500'>Booking Full!</p>
+              }
+              
               <h2 className='text-white'>Total Days: <span className=' text-yellow-500'>{values.totalDays}</span></h2>
             </div>
           </form>

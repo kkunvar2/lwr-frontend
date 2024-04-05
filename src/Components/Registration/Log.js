@@ -104,7 +104,9 @@ const Log = () => {
                             </div>
 
                             <div className="flex items-center justify-between mt-4">
-                                <p className="text-sm  text-blue-400 dark:text-gray-200 hover:text-gray-500">Forget Password?</p>
+                                <Link to='forgotPassword'>
+                                    <p className="text-sm  text-blue-400 dark:text-gray-200 hover:text-gray-500">Forget Password?</p>
+                                </Link>
 
                                 <button className="px-6 py-2 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-yellow-400 rounded-lg hover:bg-yellow-500"
                                         onClick={handleSubmit}
