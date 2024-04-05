@@ -6,7 +6,7 @@ const MemEvent = () => {
   const events = ["Birthday", "Engagement", "Party"];
 
   const [values, setvalues] = useState({
-    type: '',
+    funcType: '',
     dateFrom: '',
     dateTo: '',
     check: false,
@@ -20,13 +20,20 @@ const MemEvent = () => {
   //Submit
   const handleSubmit = (e) => {
     e.preventDefault()
-      axios.post('http://localhost:8081/lwresident/v1/events/newEvent', values)
+      const token = localStorage.getItem('token')
+      axios.post('http://localhost:8081/lwresident/v1/events/newEvent', values,
+    {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+      }
+    })
         
       .then((res) => {
-          console.log('submited', res);
+          // console.log('submited', res);
           setvalues({
             ...values,
-              type: '',
+              funcType: '',
+              book: false,
           })
           console.log(values)
         })
@@ -51,7 +58,7 @@ const MemEvent = () => {
     }));
   
     // Field empty
-    const empty = values.type !== '' && values.dateFrom !== '' && values.dateTo !== '';
+    const empty = values.funcType !== '' && values.dateFrom !== '' && values.dateTo !== '';
     if (!empty) {
       setvalues((prevValues) => ({
         ...prevValues,
@@ -113,8 +120,8 @@ const MemEvent = () => {
                 <label className="leading-7 text-lg text-gray-400">Type: </label>
                 <select className='max-lg:w-[95%] lg:ml-4 bg-gray-600 bg-opacity-20 focus:bg-transparent focus:ring-2 focus:ring-yellow-900 rounded border border-gray-600 focus:border-yellow-500 text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out'
                   onChange={handlechange}
-                  value={values.type}
-                  name="type"  >
+                  value={values.funcType}
+                  name="funcType"  >
                   <option className='bg-gray-600 font-normal mb-3' >Select a Event</option>
                   {
                     events.map((event, i) => {
@@ -124,7 +131,7 @@ const MemEvent = () => {
                   <option className='bg-gray-600 text-white' value='Other'><input className='text-white' type='text' placeholder='Other' />Other</option>
                 </select>
               </div>
-              {values.type === "Other" && ( // Conditionally render input box if "Other" is selected
+              {values.funcType === "Other" && ( // Conditionally render input box if "Other" is selected
                 <input
                   type="text"
                   placeholder='Enter other type'

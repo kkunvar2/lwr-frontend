@@ -8,7 +8,7 @@ const Users = () => {
     const [users, setusers] = useState([])
 
     useEffect(() => {
-        axios.get('http:localhost:8081/lwresident/v1/')
+        axios.get('http://localhost:8081/lwresident/v1/admin/members')
             .then(response => {
                 setusers(response.data);  
             })
