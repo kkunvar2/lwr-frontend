@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useState } from 'react'
+import Mybooking from './Mybooking';
 
 const MemEvent = () => {
 
@@ -42,7 +43,7 @@ const MemEvent = () => {
           })
           setBooking({...booking,success:true,})
           setTimeout(()=> {
-            setBooking({...booking,success:true,})
+            setBooking({...booking,success:false,})
           },2000)
 
           console.log(values)
@@ -92,7 +93,7 @@ const MemEvent = () => {
       setBooking({...booking, eventAvailable:true})
       setTimeout(() =>{
         setBooking({...booking, eventAvailable:false})
-      },1000)
+      },2000)
 
       setvalues((values) => ({
         ...values,
@@ -115,17 +116,17 @@ const MemEvent = () => {
   };
   
 
-      const handlechange = (e) => {
-        const { name, value } = e.target;
-        setvalues({
-          ...values,
-          [name]: value,
-        });
-      }
+    const handlechange = (e) => {
+      const { name, value } = e.target;
+      setvalues({
+        ...values,
+        [name]: value,
+      });
+    }
   return (
     <>
-      <section className=' bg-gray-900 h-auto md:h-screen'>
-        <div className='flex flex-col px-4 py-24 gap-16'>
+      <section className=' bg-gray-900 h-auto '>
+        <div className='flex max-md:flex-col px-4 py-24 gap-16 items-center'>
           {/* form */}
           <form onSubmit={handleSubmit} className='lg:w-[45%] md:w-1/2 bg-gray-800 bg-opacity-50 rounded-lg p-8 flex flex-col w-[100%] mt-10 md:mt-0'>
             <div className='flex items-center justify-between'>
@@ -202,22 +203,24 @@ const MemEvent = () => {
                   Book
                 </button>
               </div>
-              {booking.success &&
-              <p className='text-green-500'>Event booked Succcessfully</p>
-              }
-              {booking.eventAvailable &&
-              <p className='text-green-500'>Booking Available</p>
-              }
-              {booking.eventFull &&
-              <p className='text-red-500'>Booking Full!</p>
-              }
-              
-              <h2 className='text-white'>Total Days: <span className=' text-yellow-500'>{values.totalDays}</span></h2>
+              <div className='flex flex-row md:flex-col gap-2'>
+                <h2 className='text-white'>Total Days: <span className=' text-yellow-500'>{values.totalDays}</span></h2>
+                {booking.success &&
+                <p className='text-green-500'>Event booked Succcessfully</p>
+                }
+                {booking.eventAvailable &&
+                <p className='text-green-500'>Booking Available</p>
+                }
+                {booking.eventFull &&
+                <p className='text-red-500'>Booking Full!</p>
+                }
+              </div>
             </div>
           </form>
           {/* Tab */}
-          <div className='lg:w-[45%]'>
-
+          <div className='w-[100%]'>
+            <h2 className='text-[1.4rem] text-gray-500 font-semibold tracking-wider'><spam className='text-yellow-400'>My</spam> Bookings</h2>
+              <Mybooking/>
           </div>
         </div>
       </section>

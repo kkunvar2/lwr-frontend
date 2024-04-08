@@ -24,8 +24,11 @@ const AdminDashboard = () => {
         members: member.length,
         secretaries: secretary.length 
       })
+
     }).catch(err => console.log("fetching failed"))
+
   },[])
+  
   return (
     <>
     <div className="flex flex-col lg:flex-row bg-gray-300 min-h-screen">
