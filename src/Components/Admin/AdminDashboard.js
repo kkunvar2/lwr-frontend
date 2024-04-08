@@ -15,9 +15,9 @@ const AdminDashboard = () => {
   })
 
   useEffect(() => {
-    axios.get('http://localhost:8081/lwresident/v1/auth/signup')
+    axios.get('http://localhost:8081/lwresident/v1/admin/members')
     .then((res)=> {
-      const secretary = res.data.filter(user => user.role === 'SECRETARY');
+      const secretary = res.data.filter(user => user.role === 'SECRETORY');
       const member = res.data.filter(user => user.role === 'MEMBER');
 
       setcount({

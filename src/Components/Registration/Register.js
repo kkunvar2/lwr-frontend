@@ -6,7 +6,7 @@ import axios from 'axios';
 const Register = () => {
     const navigate = useNavigate();
 
-    const roles = ['ADMIN', 'MEMBER', 'SECRETORY', 'COMMITTEE', 'GUARD'];
+    const roles = ['MEMBER', 'SECRETORY', 'COMMITTEE', 'GUARD'];
     const wings = ['A', 'B', 'C', 'D'];
     const floors = {
         'A': ['101', '102', '103', '104', '105'],
