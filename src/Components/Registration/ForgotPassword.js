@@ -23,14 +23,15 @@ const ForgotPassword = () => {
   const handleSubmit = async(e) => {
     e.preventDefault()
     try {
-      const response = await axios.post('http://localhost:8081/lwresident/v1/auth/Forgot', email, {
-          headers: {
-              'Content-Type': 'application/json',
-          },
-      });
+      const response = await axios.post('http://localhost:8081/lwresident/v1/forgetpassword/verifyMail',null,
+    {
+      params : {
+        email,
+      }
+    });
 
       if (response.status === 200) {
-          localStorage.setItem('token', response.data.token);
+          // localStorage.setItem('token', response.data.token);
           // saveLoggedInUser();
           navigate("/otp");
           console.log('email verified');

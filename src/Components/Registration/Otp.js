@@ -9,7 +9,12 @@ const Otp = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        axios.post(`http://localhost:8081/lwresident/v1`)
+        axios.post(`http://localhost:8081/lwresident/v1/forgetpassword/verifyOtp`, null, 
+        {
+            params:{
+                otp,
+            }
+        })
         .then((res) => {
             navigate("/newPassword");
         })
@@ -36,11 +41,11 @@ const Otp = () => {
                     <div className="w-full mt-4">
                               <input className="text-center w-full px-4 py-2 mt-2 text-gray-400 placeholder-gray-500 bg-gray-800 border rounded-lg focus:focus:border-yellow-300  focus:ring-opacity-40  focus:ring-blue-300" 
                               type="text" 
-                              placeholder="xxxx" 
+                              placeholder="xxxxxx" 
                               name='otp' 
                               value={otp} 
                               onChange={(e) => setOtp(e.target.value)}
-                              maxLength={4} />
+                              maxLength={6} />
                           </div>
                         <button className=" px-6 py-2 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-yellow-400 rounded-lg hover:bg-yellow-500"
                                 onClick={handleSubmit}
