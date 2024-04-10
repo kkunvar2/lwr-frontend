@@ -21,6 +21,8 @@ import SecMeetings from './Components/Admin/CreateMeetings'
 import Users from './Components/Admin/Users'
 import AllBookings from './Components/Events/AllBookings'
 import ForgotPassword from './Components/Registration/ForgotPassword'
+import Otp from './Components/Registration/Otp'
+import NewPassword from './Components/Registration/NewPassword'
 
 
 const App = () => {
@@ -45,7 +47,8 @@ const App = () => {
         {/* Admin */}
         <Route path='/admindashboard' element={<AdminDashboard />}/>
         <Route path='/approval' element={<Approval />}/>
-        <Route path='users' element={<Users/>}/>
+        <Route path='/users' element={<Users/>}/>
+        
         
         {/* Landing Page */}
         <Route path='/' element={<Landing />}/>
@@ -54,6 +57,8 @@ const App = () => {
         <Route path='/log' element={<Log />}/>
         <Route path='/register' element={<Register />}/>
         <Route path='/forgotPassword' element={<ForgotPassword />}/>
+        <Route path='/otp' element={<Otp />}/>
+        <Route path='/newPassword' element={<NewPassword />}/>
 
         {/* Dashboard */}
         <Route path='/dash'  

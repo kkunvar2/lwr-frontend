@@ -104,7 +104,7 @@ const Log = () => {
                             </div>
 
                             <div className="flex items-center justify-between mt-4">
-                                <Link to='forgotPassword'>
+                                <Link to='/forgotPassword'>
                                     <p className="text-sm  text-blue-400 dark:text-gray-200 hover:text-gray-500">Forget Password?</p>
                                 </Link>
 

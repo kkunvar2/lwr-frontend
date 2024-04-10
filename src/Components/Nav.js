@@ -1,36 +1,55 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { Navbar } from 'flowbite-react';
-import { Link, useNavigate } from 'react-router-dom';
+import {useNavigate } from 'react-router-dom';
 import { isLoggedIn, logoutUser } from '../Services/authService';
 import { FaCircleUser } from "react-icons/fa6";
+import { Link } from 'react-scroll';
 
 const Nav = () => {
     const navigate = useNavigate();
     const isLog = isLoggedIn();
 
+    //Login
+    const handleLogin = () =>{
+        navigate('/log');
+    }
+
+    //register
+    const handleRegister = () =>{
+        navigate('/register');
+    }
     //Logout
     const handleLogout = () =>{
         logoutUser();
         navigate('/log');
     }
 
+    //scrolling 
+    const navRef = useRef();
+    const scrollTo = (targetId) => {
+        const targetMenu = document.getElementById(targetId);
+        if(targetMenu && navRef.current){
+            window.scroll({
+                top: targetMenu.offsetTop - navRef.current.offsetHeight,
+                behavior: 'smooth',
+            });
+        }
+    }
   return (
     <>
            
-                <Navbar fluid rounded className='sticky top-0 shadow-lg py-1 ' style={{ zIndex: 100 }}>
+                <Navbar ref={navRef} fluid rounded className='sticky top-0 shadow-lg py-1 ' style={{ zIndex: 100 }}>
                     <Navbar.Brand >
                         <span className="self-center text-blue-500 whitespace-nowrap text-xl font-bold ">LW Residential</span>
                     </Navbar.Brand>
                     <div className="flex md:order-2 item-center">
                         {!isLog && 
-                            <Link to='/log'>
-                                <button className='bg-blue-500 py-2 px-3 rounded-md mx-2 text-white font-semibold hover:bg-gray-700 focus:'>Login</button>
-                            </Link>
+                                <button className='bg-blue-500  px-3 rounded-md mx-2 text-white font-semibold hover:bg-gray-700 focus:'
+                                     onClick={handleLogin}>Login</button>
                         }
                         {!isLog &&
-                            <Link to='/register'>
-                                <button className='bg-yellow-400 py-2 px-3 rounded-md mx-2 text-white font-semibold hover:bg-gray-700 focus:'>Signup</button>
-                            </Link>
+                                <button className='bg-yellow-400 py-2 px-3 rounded-md mx-2 text-white font-semibold hover:bg-gray-700 focus:'
+                                onClick={handleRegister}>Signup</button>
                         }
                         
                         {isLog &&
@@ -47,11 +66,18 @@ const Nav = () => {
                         <Navbar.Toggle />
                     </div>
                     <Navbar.Collapse className='pt-3'>
-                            <Link to='/'>
-                                    <Navbar.Link  active className=' bg-blue-500'>Home</Navbar.Link>                                                    
+                            <Link to='home' spy={true} smooth={true} duration={500}>
+                                    <Navbar.Link onClick={() => scrollTo("home")} active className=' bg-blue-500'>Home</Navbar.Link>                                                    
                             </Link>
-                            <Navbar.Link href="#">About</Navbar.Link>
-                            <Navbar.Link href="#">Contact</Navbar.Link>
+
+                            <Link to='image' spy={true} smooth={true} duration={500}>
+                                <Navbar.Link onClick={() => scrollTo("image")} >About</Navbar.Link>
+                            </Link>
+
+                            <Link to='contact' spy={true} smooth={true} duration={500}>
+                                <Navbar.Link onClick={() => scrollTo("contact")} >Contact</Navbar.Link>
+                            </Link>
+
                             <Link to='/dash'>
                                 {isLog &&
                                     <Navbar.Link >Dashboard</Navbar.Link>

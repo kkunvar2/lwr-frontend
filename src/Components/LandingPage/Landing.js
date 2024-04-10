@@ -55,7 +55,7 @@ const Landing = () => {
     <Nav/>
 
       {/* hero */}
-      <div className='hero-section'>
+      <div id='home' className='hero-section'>
         <h1 className='animate__animated animate__zoomIn'>Welcome to <span className='tl'>L</span>/<span className='tw'>W</span> Residential</h1>
         <div className='gradienet-fill'>
           <p className=''>Have Fabulous Flat and awesome Society</p>
@@ -93,7 +93,7 @@ const Landing = () => {
       </div>
 
       {/* Image gallery */}
-      <div className='image-container'>
+      <div id='image' className='image-container'>
         <div className='head'>
           <h1 className=''>Image Gallery</h1>
           <p className='underline'></p>
@@ -144,7 +144,7 @@ const Landing = () => {
       </div>
     
       {/* Get in touch */}
-      <div className='get-in-touch'>
+      <div id='contact' className='get-in-touch'>
         <form onSubmit={handlesubmit} className='contact-form'>
             <button className='c-btn'>CONTACTS</button>
             <h1>Get In Touch Now</h1>
