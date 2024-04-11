@@ -23,6 +23,7 @@ import AllBookings from './Components/Events/AllBookings'
 import ForgotPassword from './Components/Registration/ForgotPassword'
 import Otp from './Components/Registration/Otp'
 import NewPassword from './Components/Registration/NewPassword'
+import Page from './Components/Page'
 
 
 export const userTypes = {
@@ -42,7 +43,7 @@ const App = () => {
         return children;
       }
       else{
-        return <Navigate to='/'/>
+        return <Navigate to='/page'/>
       }
     } 
     
@@ -81,6 +82,7 @@ const App = () => {
         
         {/* Landing Page */}
         <Route path='/' element={<Landing />}/>
+        <Route path='/page' element={<Page />}/>
 
         {/* Login & Signup*/}
         <Route path='/log' element={<Log />}/>
@@ -92,7 +94,7 @@ const App = () => {
         {/* Dashboard */}
        
           <Route path='/dash'  
-              element={ <Authenticated>
+              element={ <Authenticated requiredRoles={['MEMBER', 'ADMIN']}>
                 <Dashboard />
                 </Authenticated>}/>
         

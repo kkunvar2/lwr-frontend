@@ -53,6 +53,7 @@ const Log = () => {
 
             if (response.status === 200) {
                 localStorage.setItem('token', response.data.token);
+                localStorage.setItem('role', response.data.role);
                 saveLoggedInUser(inputs);
                
                 const userRole = getUserRole();

@@ -2,9 +2,9 @@ import { Outlet, useNavigate } from "react-router-dom";
 import { useEffect } from "react";        
 
 // saveUser
-export const saveLoggedInUser = (inputs, role) => {
+export const saveLoggedInUser = (inputs,role) => {
     sessionStorage.setItem('authenticatUser', inputs)
-    sessionStorage.setItem("userRole", role)
+  
 }
 
 // check User Logged in?
@@ -21,7 +21,7 @@ export const isLoggedIn = () => {
 
 //get user role
 export const getUserRole = () => {
-    const userRole = sessionStorage.getItem('userRole');
+    const userRole = localStorage.getItem('role');
     return userRole;
   };
 //get Logged in user

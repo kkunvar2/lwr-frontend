@@ -24,6 +24,15 @@ const Nav = () => {
         navigate('/log');
     }
 
+    const handleHome = () => {
+        scrollTo("home");
+        navigate('/');
+    }
+    
+    const handleDash = () => {
+        navigate('/dash')
+    }
+
     //scrolling 
     const navRef = useRef();
     const scrollTo = (targetId) => {
@@ -65,9 +74,9 @@ const Nav = () => {
                                                 
                         <Navbar.Toggle />
                     </div>
-                    <Navbar.Collapse className='pt-3'>
+                    <Navbar.Collapse className='pt-3 cursor-pointer'>
                             <Link to='home' spy={true} smooth={true} duration={500}>
-                                    <Navbar.Link onClick={() => scrollTo("home")} active className=' bg-blue-500'>Home</Navbar.Link>                                                    
+                                    <Navbar.Link onClick={handleHome} active className=' bg-blue-500'>Home</Navbar.Link>                                                    
                             </Link>
 
                             <Link to='image' spy={true} smooth={true} duration={500}>
@@ -78,11 +87,11 @@ const Nav = () => {
                                 <Navbar.Link onClick={() => scrollTo("contact")} >Contact</Navbar.Link>
                             </Link>
 
-                            <Link to='/dash'>
+                            
                                 {isLog &&
-                                    <Navbar.Link >Dashboard</Navbar.Link>
+                                    <Navbar.Link onClick={handleDash} >Dashboard</Navbar.Link>
                                 }
-                            </Link>
+                            
                     
                     </Navbar.Collapse>
                 </Navbar>   
