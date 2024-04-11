@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { saveLoggedInUser } from '../../Services/authService';
+import { getRoles } from '@testing-library/react';
 
 
 
@@ -53,7 +54,24 @@ const Log = () => {
             if (response.status === 200) {
                 localStorage.setItem('token', response.data.token);
                 saveLoggedInUser(inputs);
-                navigate('/dash');
+               
+                const userRole = getRoles();
+
+                switch (userRole) {
+                    case userTypes.ADMIN:
+                        navigate('/admindashboard');
+                        break;
+                    case userTypes.MEMBER:
+                        navigate('/dash');
+                        break;
+                    case userTypes.SECURITY:
+                       navigate("/dash")
+                        break;
+                    default:
+                        navigate("/log")
+                        break;
+                }
+
                 console.log('Login Successfully');
                 window.location.reload(false)
             } else {

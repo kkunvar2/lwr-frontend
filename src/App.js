@@ -13,7 +13,7 @@ import Landing from './Components/LandingPage/Landing'
 import Log from './Components/Registration/Log'
 import Register from './Components/Registration/Register'
 import Maintanance from './Components/Maintanance/Maintanance'
-import { isLoggedIn } from './Services/authService'
+import { getUserRole, isLoggedIn } from './Services/authService'
 import Profile from './Components/Profile'
 import AdminDashboard from './Components/Admin/AdminDashboard'
 import Approval from './Components/Admin/Approval'
@@ -27,11 +27,18 @@ import NewPassword from './Components/Registration/NewPassword'
 
 const App = () => {
   
+  const userTypes = {
+    ADMIN: "ADMIN",
+    MEMBER: "MEMBER",
+    SECURITY: "SECURITY"
+  }
+
   //Secure Routes
     const Authenticated = ({children}) => {
       const isAuth = isLoggedIn();
+      const userRole = getUserRole();
 
-      if(isAuth){
+      if(isAuth && requiredRoles.includes(userRole)){
         return children;
       }
       else{
@@ -45,9 +52,14 @@ const App = () => {
       <Routes>
 
         {/* Admin */}
-        <Route path='/admindashboard' element={<AdminDashboard />}/>
-        <Route path='/approval' element={<Approval />}/>
-        <Route path='/users' element={<Users/>}/>
+        <Authenticated requiredRoles={['ADMIN']}>
+          <Routes>
+              {/* Admin */}
+              <Route path="/admindashboard" element={<AdminDashboard />} />
+              <Route path="/approval" element={<Approval />} />
+              <Route path="/users" element={<Users />} />    
+          </Routes>
+        </Authenticated>
         
         
         {/* Landing Page */}
