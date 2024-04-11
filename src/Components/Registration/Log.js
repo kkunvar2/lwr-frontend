@@ -2,8 +2,8 @@ import axios from 'axios';
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { saveLoggedInUser } from '../../Services/authService';
-import { getRoles } from '@testing-library/react';
-
+import { getUserRole } from '../../Services/authService';
+import {userTypes} from "../../App"
 
 
 const Log = () => {
@@ -55,7 +55,7 @@ const Log = () => {
                 localStorage.setItem('token', response.data.token);
                 saveLoggedInUser(inputs);
                
-                const userRole = getRoles();
+                const userRole = getUserRole();
 
                 switch (userRole) {
                     case userTypes.ADMIN:
@@ -68,7 +68,7 @@ const Log = () => {
                        navigate("/dash")
                         break;
                     default:
-                        navigate("/log")
+                        navigate("/")
                         break;
                 }
 

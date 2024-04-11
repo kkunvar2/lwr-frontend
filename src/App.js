@@ -25,16 +25,16 @@ import Otp from './Components/Registration/Otp'
 import NewPassword from './Components/Registration/NewPassword'
 
 
+export const userTypes = {
+  ADMIN: "ADMIN",
+  MEMBER: "MEMBER",
+  SECURITY: "SECURITY"
+  
+}
 const App = () => {
   
-  const userTypes = {
-    ADMIN: "ADMIN",
-    MEMBER: "MEMBER",
-    SECURITY: "SECURITY"
-  }
-
-  //Secure Routes
-    const Authenticated = ({children}) => {
+    //Secure Routes
+    const Authenticated = ({children, requiredRoles}) => {
       const isAuth = isLoggedIn();
       const userRole = getUserRole();
 
@@ -42,24 +42,41 @@ const App = () => {
         return children;
       }
       else{
-        return <Navigate to='/log'/>
+        return <Navigate to='/'/>
       }
     } 
-
+    
+    
   return (
     <>
-    <BrowserRouter>
+     <BrowserRouter>
       <Routes>
 
         {/* Admin */}
-        <Authenticated requiredRoles={['ADMIN']}>
-          <Routes>
-              {/* Admin */}
-              <Route path="/admindashboard" element={<AdminDashboard />} />
-              <Route path="/approval" element={<Approval />} />
-              <Route path="/users" element={<Users />} />    
-          </Routes>
-        </Authenticated>
+        <Route
+          path="/admindashboard"
+          element={
+            <Authenticated requiredRoles={['ADMIN']}>
+              <AdminDashboard />
+            </Authenticated>
+          }
+        />
+        <Route
+          path="/approval"
+          element={
+            <Authenticated requiredRoles={['ADMIN']}>
+              <Approval />
+            </Authenticated>
+          }
+        />
+        <Route
+          path="/users"
+          element={
+            <Authenticated requiredRoles={['ADMIN']}>
+              <Users />
+            </Authenticated>
+          }
+        />
         
         
         {/* Landing Page */}
@@ -73,11 +90,12 @@ const App = () => {
         <Route path='/newPassword' element={<NewPassword />}/>
 
         {/* Dashboard */}
-        <Route path='/dash'  
-            element={<Authenticated>
-              <Dashboard />
-            </Authenticated>
-        }/>
+       
+          <Route path='/dash'  
+              element={ <Authenticated>
+                <Dashboard />
+                </Authenticated>}/>
+        
 
         {/* Guest */}
         <Route path='/guest' element={<Guest/>}/>
