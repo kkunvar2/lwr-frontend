@@ -72,16 +72,24 @@ const AdminDashboard = () => {
 
               {/* users actions analysis */}
             </div>
-              <div className='grid grid-cols-2 gap-5 py-12 md:px-12'>
-                {/* Bookings */}
-                <Link to='/allBookings'>
-                  <div className='flex items-center bg-slate-50  rounded-md shadow-md hover:bg-slate-200'>
-                    <p className='bg-gray-400  text-gray-400 h-10 w-2 rounded-xl content-none' >.</p>
-                    <p className='ml-5 font-semibold tracking-widest text-blue-400'>Bookings</p>
-                  </div>
-                </Link>
-                
-              </div>
+
+            <div className='grid grid-cols-2 gap-5 py-12 md:px-12'>
+              {/* Bookings */}
+              <Link to='/allBookings'>
+                <div className='flex items-center bg-slate-50  rounded-md shadow-md hover:bg-slate-200'>
+                  <p className='bg-gray-400  text-gray-400 h-10 w-2 rounded-xl content-none' >.</p>
+                  <p className='ml-5 font-semibold tracking-widest text-blue-400'>Bookings</p>
+                </div>
+              </Link>
+              {/* Complaints */}
+              <Link to='/allComplaints'>
+                <div className='flex items-center bg-slate-50  rounded-md shadow-md hover:bg-slate-200'>
+                  <p className='bg-gray-400  text-gray-400 h-10 w-2 rounded-xl content-none' >.</p>
+                  <p className='ml-5 font-semibold tracking-widest text-blue-400'>Complaints</p>
+                </div>
+              </Link>
+              
+            </div>
           </div>
         </div>
     </>

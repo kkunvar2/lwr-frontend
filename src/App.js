@@ -24,6 +24,7 @@ import ForgotPassword from './Components/Registration/ForgotPassword'
 import Otp from './Components/Registration/Otp'
 import NewPassword from './Components/Registration/NewPassword'
 import Page from './Components/Page'
+import AllComplaints from './Components/Complaint/AllComplaints'
 
 
 export const userTypes = {
@@ -54,7 +55,7 @@ const App = () => {
       <Routes>
 
         {/* Admin */}
-        <Route
+        {/* <Route
           path="/admindashboard"
           element={
             <Authenticated requiredRoles={['ADMIN']}>
@@ -77,8 +78,10 @@ const App = () => {
               <Users />
             </Authenticated>
           }
-        />
-        
+        /> */}
+        <Route path='/admindashboard' element={<AdminDashboard />}/>
+        <Route path='/users' element={<Users />}/>
+        <Route path='/approval' element={<Approval />}/>
         
         {/* Landing Page */}
         <Route path='/' element={<Landing />}/>
@@ -109,6 +112,7 @@ const App = () => {
         {/* Complaint */}
         <Route path='/complaintForm' element={<ComplaintForm />}/>
         <Route path='/complaintTab' element={<ComplaintTab />}/>
+        <Route path='/allComplaints' element={<AllComplaints />}/>
 
         {/* Event */}
         <Route path='/memevent' element={<MemEvent />}/>
