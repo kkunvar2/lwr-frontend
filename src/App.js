@@ -93,10 +93,11 @@ const App = () => {
 
         {/* Dashboard */}
        
-          <Route path='/dash'  
+          {/* <Route path='/dash'  
               element={ <Authenticated requiredRoles={['MEMBER', 'ADMIN']}>
                 <Dashboard />
-                </Authenticated>}/>
+                </Authenticated>}/> */}
+        <Route path='/dash' element={<Dashboard />}/>
         
 
         {/* Guest */}

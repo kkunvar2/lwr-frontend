@@ -19,6 +19,18 @@ export const isLoggedIn = () => {
     }
 }
 
+//Guard authority
+export const isUserRole = () => {
+    const isUser = localStorage.getItem('role')
+   
+    if(isUser == 'SECURITY'){
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+
 //get user role
 export const getUserRole = () => {
     const userRole = localStorage.getItem('role');
