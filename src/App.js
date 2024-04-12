@@ -55,7 +55,7 @@ const App = () => {
       <Routes>
 
         {/* Admin */}
-        {/* <Route
+        <Route
           path="/admindashboard"
           element={
             <Authenticated requiredRoles={['ADMIN']}>
@@ -78,10 +78,10 @@ const App = () => {
               <Users />
             </Authenticated>
           }
-        /> */}
-        <Route path='/admindashboard' element={<AdminDashboard />}/>
+        />
+        {/* <Route path='/admindashboard' element={<AdminDashboard />}/>
         <Route path='/users' element={<Users />}/>
-        <Route path='/approval' element={<Approval />}/>
+        <Route path='/approval' element={<Approval />}/> */}
         
         {/* Landing Page */}
         <Route path='/' element={<Landing />}/>

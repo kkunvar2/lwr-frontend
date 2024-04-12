@@ -92,7 +92,7 @@ const ComplaintTab = () => {
                     <td className='font-bold text-blue-500'>{complaint.comid}</td>
                     <td className='text-gray-700'>{complaint.title}</td>
                     <td className='text-gray-700'>
-                      <span className={`p-1.5 text-xs font-medium uppercase tracking-wider text-yellow-800 bg-${complaint.status === 'Solved' ? 'green' : 'yellow'}-200 rounded-lg`}>
+                      <span className={`p-1.5 text-xs font-medium uppercase tracking-wider text-yellow-800 bg-${complaint.status === 'COMPLETED' ? 'green' : 'yellow'}-200 rounded-lg`}>
                         {complaint.status}
                       </span>
                     </td>

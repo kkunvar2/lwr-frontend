@@ -13,7 +13,7 @@ const AllComplaints = () => {
     //Solvw Complain
     const handleSolve = (id) => {
         const token = localStorage.getItem('token');
-        axios.patch(`http://localhost:8081:/lwresident/v1/solve/${id}`, {
+        axios.patch(`http://localhost:8081/lwresident/v1/complaint/solve/${id}`, {
             headers:{
                 'Authorization': `Bearer ${token}`
               }
@@ -27,13 +27,13 @@ const AllComplaints = () => {
     //Delete Complaint
     const handleDelete = (id) => {
         const token = localStorage.getItem('token');
-        axios.delete(`http://localhost:8081/lwresident/v1/${id}`, {
+        axios.delete(`http://localhost:8081/lwresident/v1/complaint/delete/${id}`, {
             headers:{
                 'Authorization': `Bearer ${token}`
               }
         })
         .then((res) =>{{
-        setComplaints(complaints.filter(complaint => complaint.comid !== id))
+            setComplaints(complaints.filter(complaint => complaint.comid !== id))
         }})
         .catch((err)=> {
             console.log("didn't Delete data");
@@ -42,14 +42,19 @@ const AllComplaints = () => {
 
     //fetched all complaints
     const fetchedData = async(e) => {
-        await  axios.get('')
+        const token = localStorage.getItem('token');
+        await  axios.get('http://localhost:8081/lwresident/v1/complaint/view-all', {
+            headers:{
+                'Authorization': `Bearer ${token}`
+              }
+        })
         .then(res => setComplaints(res.data))
         .catch(err => console.log("complaints can't fetched"));
     }
 
     useEffect(() => {
         fetchedData()
-    }, [handleSolve])
+    }, [])
 
 
   return (
@@ -70,32 +75,35 @@ const AllComplaints = () => {
                         className="p-2 w-9 rounded-md my-4"
                     />
                 </div>       
-                {complaints.map((complaint, index) => ( 
-                    <div key={index}  className="mx-auto  max-w-2xl sm:mt-20 lg:mt-2 lg:max-w-4xl">
+                {complaints.map((complaint) => ( 
+                    <div  className="mx-auto  max-w-2xl sm:mt-20 lg:mt-2 lg:max-w-4xl">
                         <dl className="grid max-w-xl  grid-cols-1 gap-x-8 gap-y-10 lg:max-w-none lg:grid-cols-2 lg:gap-y-16">
-                            <div className="relative pl-16 border border-slate-500 p-4 rounded-lg">
+                            <div key={complaint.comid} className="relative pl-16 border border-slate-500 p-4 rounded-lg">
                                 <div className='flex justify-between'>
                                     <dt className="text-base font-semibold leading-7 text-gray-900">
                                         <div className="absolute left-2 top-3 flex h-12 w-12 items-center justify-center rounded-lg bg-blue-700">
                                             <PiHandPalmFill className='text-white w-8 h-8' />
                                             
                                         </div>
-                                        {complaint.agenda}
-                                        <p className='text-gray-400'>by Dixit <span className='text-blue-700 text-sm'>+91{complaint.mobile}</span></p>
+                                        {complaint.title}
+                                        <p className='text-gray-400'>by {complaint.mem_id.name} <span className='text-blue-700 text-sm'>+91{complaint.mem_id.mobile}</span></p>
                                     </dt>
                                     <div className='flex text-center '>
                                         
                                         <MdOutlineDeleteOutline className='w-6 h-6 text-red-500'
-                                        onClick={handleDelete(complaint.comid)}/>
+                                        onClick={() => handleDelete(complaint.comid)}
+                                        />
                                     </div>
                                 </div>
-                                <dd className="mt-2 text-base leading-7 bg-slate-200 rounded-lg p-1 text-gray-600">Since One Month we are troubling to water Leakage problem. take some actions for that</dd>
+                                <dd className="mt-2 text-base leading-7 bg-slate-200 rounded-lg p-1 text-gray-600">
+                                    {complaint.description}
+                                </dd>
                                 <div className='flex justify-between mt-2 item-center'>
                                     <div className='flex items-center gap-2'>
-                                        <p className=' bg-slate-400 text-[10px] px-[5px] rounded-full'>Wing:{complaint.wing}</p>
-                                        <p className=' bg-slate-400 text-[10px] px-[5px] rounded-full'>floor: {complaint.flat}</p>
+                                        <p className=' bg-slate-400 text-[10px] px-[5px] rounded-full'>Wing:{complaint.mem_id.wing}</p>
+                                        <p className=' bg-slate-400 text-[10px] px-[5px] rounded-full'>floor: {complaint.mem_id.flat}</p>
                                     </div>
-                                    {!complaint.status === 'COMPLETED' ? (
+                                    {complaint.status == 'PROGRESS' ? (
                                         <button className='bg-yellow-400 px-2 rounded-lg cursor-pointer text-white font-semibold shadow-lg hover:shadow-none hover:bg-yellow-500'
                                             onClick={() => handleSolve(complaint.comid)}>Solve</button>
                                     ) : (
