@@ -9,7 +9,7 @@ const Otp = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        axios.post(`http://localhost:8081/lwresident/v1/forgetpassword/verifyOtp`, null, 
+        axios.post(`http://localhost:8081/lwresident/v1/forgetPassword/verifyOtp`, {credentials: "include"}, 
         {
             params:{
                 otp,

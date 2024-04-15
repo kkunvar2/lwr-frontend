@@ -23,7 +23,7 @@ const ForgotPassword = () => {
   const handleSubmit = async(e) => {
     e.preventDefault()
     try {
-      const response = await axios.post('http://localhost:8081/lwresident/v1/forgetpassword/verifyMail',null,
+      const response = await axios.post('http://localhost:8081/lwresident/v1/forgetPassword/verifyMail',null,
     {
       params : {
         email,

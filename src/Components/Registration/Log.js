@@ -54,6 +54,7 @@ const Log = () => {
             if (response.status === 200) {
                 localStorage.setItem('token', response.data.token);
                 localStorage.setItem('role', response.data.role);
+
                 saveLoggedInUser(inputs);
                
                 const userRole = getUserRole();
@@ -65,7 +66,7 @@ const Log = () => {
                     case userTypes.MEMBER:
                         navigate('/dash');
                         break;
-                    case userTypes.SECURITY:
+                    case userTypes.GUARD:
                        navigate("/dash")
                         break;
                     default:
