@@ -78,16 +78,23 @@ const  CreateMeetings = () => {
 
 
   //Conclusion
-  const handleConclusion = async() => {
+  const handleConclusion = async(meetingId) => {
       const token = localStorage.getItem('token')
-      await axios.post('http://localhost:8081/lwresident/v1/updateConclusion/id', {conclusion: values.conclusion}, {
+      await axios.post(`http://localhost:8081/lwresident/v1/updateConclusion/${meetingId}`, {conclusion: values.conclusion}, {
         headers:{
           'Authorization': `Bearer ${token}`
         }
       })
       .then((res) => {
-        setconclusion(true)
-        setloading(true)
+        setloading(false);
+        setmeetings(meetings.map(meet => {
+          if (meet.meetingid === meetingId) {
+              // Update the specific meeting's conclusion
+              meet.conclusion = values.conclusion;
+          }
+          return meet;
+      }));
+        setconclusion(false)
         console.log('Conclusion Submited Successfully')
       })
       .catch((err) => {
@@ -211,7 +218,7 @@ const  CreateMeetings = () => {
                                     </td>
                                     <td  className="px-6 py-4 text-black">
                                         <button className='text-sky-500 hover:text-gray-600 bg-gray-300 p-1 rounded-md'
-                                              onClick={() => setconclusion(true)}> Conclusion</button>
+                                              onClick={() => setconclusion(meeting.meetimgId)}> Conclusion</button>
                                     </td>
                                     <td  className="px-6 py-4 text-right cursor-pointer">
                                       <FontAwesomeIcon onClick={() => handleDelete(meeting.meetingid)} icon={faTrash} size="lg" style={{ color: "#f66151" }} />    
@@ -239,7 +246,7 @@ const  CreateMeetings = () => {
                                   placeholder='Enter Conclusion'
                                   className='p-2 rounded-md '/>
                             {/* Your conclusion form inputs go here */}
-                            <button onClick={handleConclusion}
+                            <button onClick={() => handleConclusion(meetings.meetimgId)}
                                     type='submit'
                                    className="bg-sky-500 text-white px-4 py-2 w-24 rounded-md">Submit</button>
                           </div>
