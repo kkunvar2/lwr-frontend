@@ -9,13 +9,12 @@ const Otp = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        axios.post(`http://localhost:8081/lwresident/v1/forgetPassword/verifyOtp`, {credentials: "include"}, 
-        {
-            params:{
-                otp,
-            }
-        })
-        .then((res) => {
+       
+        axios.post(`http://localhost:8081/lwresident/v1/forgetPassword/verifyOtp?otp=${otp}`, {credential: "include"}
+        
+        )
+        .then((res) => { 
+            console.log("otp verified");
             navigate("/newPassword");
         })
         .catch(err => console.log("can't verify otp"));
