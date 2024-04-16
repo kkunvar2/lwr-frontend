@@ -70,6 +70,12 @@ const Log = () => {
                     case userTypes.GUARD:
                        navigate("/dash");
                         break;
+                    case userTypes.COMMITTEE:
+                        navigate("/adminDashboard");
+                        break;
+                    case userTypes.SECRETARY:
+                        navigate("/adminDashboard");
+                        break;     
                     default:
                         navigate("/")
                         break;

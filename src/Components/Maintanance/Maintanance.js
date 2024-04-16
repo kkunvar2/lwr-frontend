@@ -7,6 +7,7 @@ import axios from 'axios';
 const Maintanance = () => {
     const years = ["2022", "2023", "2024"];
     const status = ["Paid", "Dueto", "Rejected"];
+    
     const [maintanance, setMaintanance] = useState({Paid: [], Unpaid: []})
 
     useEffect(() => {

@@ -30,7 +30,9 @@ import AllComplaints from './Components/Complaint/AllComplaints'
 export const userTypes = {
   ADMIN: "ADMIN",
   MEMBER: "MEMBER",
-  GUARD: "GUARD"
+  GUARD: "GUARD",
+  COMMITTEE: "COMMITTEE",
+  SECRETARY: "SECRETARY"
   
 }
 const App = () => {
@@ -94,20 +96,34 @@ const App = () => {
         <Route path='/otp' element={<Otp />}/>
         <Route path='/newPassword' element={<NewPassword />}/>
 
-        {/* Dashboard */}
-       
-          {/* <Route path='/dash'  
-              element={ <Authenticated requiredRoles={['MEMBER', 'ADMIN']}>
-                <Dashboard />
-                </Authenticated>}/> */}
-        <Route path='/dash' element={<Dashboard />}/>
+        {/* Dashboard */} 
+        <Route path='/dash'  
+            element={ <Authenticated requiredRoles={['MEMBER', 'ADMIN']}>
+              <Dashboard />
+            </Authenticated>}/>
+        {/* <Route path='/dash' element={<Dashboard />}/> */}
         
 
         {/* Guest */}
-        <Route path='/guest' element={<Guest/>}/>
-        <Route path='/guestform' element={<GuestForm />}/>
-        <Route path='/guestreport' element={<GuestReport />}/>
-        <Route path='/guestrecords' element={<GuestRecords />}/>
+        <Route path='/guest' 
+            element={<Authenticated requiredRoles={['GUARD', 'ADMIN', 'SECRETARY']}>
+              <Guest/>
+            </Authenticated>}/>
+        
+        <Route path='/guestform' 
+            element={<Authenticated requiredRoles={['GUARD', 'ADMIN', 'SECRETARY']}>
+              <GuestForm/>
+            </Authenticated>}/>
+        
+        <Route path='/guestreport' 
+            element={<Authenticated requiredRoles={['GUARD', 'ADMIN', 'SECRETARY']}>
+            <GuestReport/>
+          </Authenticated>}/>
+
+        <Route path='/guestrecords' 
+            element={<Authenticated requiredRoles={['GUARD', 'ADMIN', 'SECRETARY']}>
+            <GuestRecords/>
+         </Authenticated>}/>
 
         {/* Complaint */}
         <Route path='/complaintForm' element={<ComplaintForm />}/>
