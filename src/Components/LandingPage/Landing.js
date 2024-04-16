@@ -9,19 +9,18 @@ import { MdCelebration, MdLibraryBooks } from "react-icons/md";
 // Images
 import club from '../Assests/clubhouse.jpg'
 import garden from '../Assests/garden.jpg'
-import resident from '../Assests/bgImage.jpg'
 import gym from '../Assests/gym.jpg'
 import temple from '../Assests/temple.jpg'
-import pool from '../Assests/swim.jpeg'
 import play from '../Assests/playground.jpg'
+import correct from '../Assests/correct.png'
 
 
 import Nav from '../Nav';
-import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 
 const Landing = () => {
+  const [success, setsuccess] = useState(false)
   const [values, setvalues] = useState({
     fullName: '',
     mobile: '',
@@ -42,7 +41,11 @@ const Landing = () => {
     e.preventDefault()
     axios.post('http://localhost:8081/lwresident/v1/contactus/submit', values)
     .then((res) => {
-      // setvalues(values)
+      setsuccess(true)
+      setTimeout(() => {
+        setsuccess(false)
+      })
+      setvalues('')
       console.log('submited', res);
     })
     .catch(err => console.log("failed to submit"));
@@ -150,6 +153,12 @@ const Landing = () => {
             <h1>Get In Touch Now</h1>
             <h4>We have Developed unique space where you can work and live with your family.</h4>
 
+            {success && 
+              <div className=' absolute flex justify-center item-center bg-cyan-50 p-3 rounded-xl shadow-lg'>
+                <p className=' text-green-400 font-semibold tracking-wide'>We Will Contact you later</p>
+                <img src={correct} className='w-8 h-8 ml-2 -mt-1' />
+              </div>
+            }
             <div className='input-form'>
               <div className='i-first'>
                 <input
@@ -194,6 +203,7 @@ const Landing = () => {
               <button className='f-btn'
                     type='submit'>Send Request</button>
             </div>
+       
         </form>
       </div>
 

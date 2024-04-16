@@ -30,7 +30,7 @@ import AllComplaints from './Components/Complaint/AllComplaints'
 export const userTypes = {
   ADMIN: "ADMIN",
   MEMBER: "MEMBER",
-  SECURITY: "GUARD"
+  GUARD: "GUARD"
   
 }
 const App = () => {

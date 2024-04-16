@@ -58,6 +58,7 @@ const Log = () => {
                 saveLoggedInUser(inputs);
                
                 const userRole = getUserRole();
+                console.log(userRole);
 
                 switch (userRole) {
                     case userTypes.ADMIN:
@@ -67,7 +68,7 @@ const Log = () => {
                         navigate('/dash');
                         break;
                     case userTypes.GUARD:
-                       navigate("/dash")
+                       navigate("/dash");
                         break;
                     default:
                         navigate("/")
