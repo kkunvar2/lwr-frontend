@@ -67,9 +67,9 @@ const Nav = () => {
                         }
 
                         {isLog &&
-                            <Link to='/profile'>
-                                 <button className='h-0 w-5 mr-2'><FaCircleUser className='h-7 w-7 mt-4  bg-sky-500 rounded-full text-gray-300 hover:text-white' /></button>
-                            </Link>
+                                 <button className='h-0 w-5 mr-2'><FaCircleUser className='h-7 w-7 mt-4  bg-sky-500 rounded-full text-gray-300 hover:text-white '
+                                 onClick={() => navigate("/profile")} /></button>
+                            
                         }
                                                 
                         <Navbar.Toggle />

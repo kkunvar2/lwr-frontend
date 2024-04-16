@@ -1,15 +1,30 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Nav from '../Nav'
 import { Link } from 'react-router-dom'
 import { isUserRole } from '../../Services/authService'
-
+import axios from 'axios'
 
 const Dashboard = () => {
+    const [username, setusername] = useState('')
     const [accordion, setaccordion] = useState({
         complaints: false,
         chekIn: false
     })
 
+    const gettingUsername = (e) => {    
+    const token = localStorage.getItem('token');
+        axios.get(`http://localhost:8081/lwresident/v1/member/getUser`, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
+        .then(res => setusername(res.data.name))
+        .catch(err => console.log("didn't get username"));
+    }
+
+    useEffect(() => {
+        gettingUsername();
+    }, [])
     const isGuard = isUserRole();
     
   return (
@@ -19,7 +34,7 @@ const Dashboard = () => {
     <Nav/>
    </div>
     <div className=' flex items-center justify-center flex-col pb-6'>
-            <h1 className='text-5xl font-bold mt-10 text-slate-400'>Welcome User</h1>
+            <h1 className='text-5xl font-bold mt-10 text-slate-400'>Welcome {username}</h1>
             <div className='grid sm:grid-cols-2 grid-cols-1 mt-12 gap-10 '>
                                 
                 {/* Maintanance */}

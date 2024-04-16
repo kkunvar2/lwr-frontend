@@ -44,7 +44,7 @@ const  CreateMeetings = () => {
       setvalues({
         agenda: '',
         date: '',
-        time: ''
+        time: '',
 
       });
       fetchMeetings();
@@ -76,9 +76,9 @@ const  CreateMeetings = () => {
 
 
   //Conclusion
-  const handleConclusion = async(meetingId) => {
+  const handleConclusion = async(meetingId, conclusion) => {
       const token = localStorage.getItem('token')
-      await axios.post(`http://localhost:8081/lwresident/v1/updateConclusion/${meetingId}`, {conclusion: values.conclusion}, {
+      await axios.patch(`http://localhost:8081/lwresident/v1/meetings/updateConclusion/${meetingId}?conclusion=${conclusion}`,null, {
         headers:{
           'Authorization': `Bearer ${token}`
         }
@@ -88,7 +88,7 @@ const  CreateMeetings = () => {
         setmeetings(meetings.map(meet => {
           if (meet.meetingid === meetingId) {
               // Update the specific meeting's conclusion
-              meet.conclusion = values.conclusion;
+              meet.conclusion = conclusion;
           }
           return meet;
       }));
@@ -173,6 +173,7 @@ const  CreateMeetings = () => {
                   </div>
 
                   {/* Meetings */}
+                  
                   <div className='px-4'>
                     <div  className="relative overflow-x-auto pt-10 ">
                         <table  className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
@@ -199,7 +200,7 @@ const  CreateMeetings = () => {
                                 </tr>
                             </thead>
                             <tbody className='h-[10rem]'>
-                              {meetings.map((meeting) =>(
+                                {meetings.map((meeting) =>(            
                                 <tr key={meeting.meetingid} className="bg-white border-b">
                                     <th className="px-6 py-4 font-semibold text-lg text-yellow-400 whitespace-nowrap">
                                         {meeting.meetingid}
@@ -215,7 +216,7 @@ const  CreateMeetings = () => {
                                     </td>
                                     <td  className="px-6 py-4 text-black">
                                         <button className='text-sky-500 hover:text-gray-600 bg-gray-300 p-1 rounded-md'
-                                              onClick={() => setconclusion(meeting.meetingId)}> Conclusion</button>
+                                              onClick={() => setconclusion(meeting.meetingid)}> Conclusion</button>
                                     </td>
                                     <td  className="px-6 py-4 text-right cursor-pointer">
                                       <FontAwesomeIcon onClick={() => handleDelete(meeting.meetingid)} icon={faTrash} size="lg" style={{ color: "#f66151" }} />    
@@ -227,34 +228,39 @@ const  CreateMeetings = () => {
                     </div>
 
                     {/* conclusion */}
-                    {conclusion === meetings.meetingId && (
-                          <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center bg-gray-900 bg-opacity-50">
-                          <div className="bg-white p-10 rounded-md shadow-lg flex flex-col gap-2">
-                            {/* cancle */}
-                            <div className='flex justify-end cursor-pointer'>
-                              <p className='text-2xl text-white bg-sky-500 rounded-full p-[1px] w-8 text-center' onClick={() => setconclusion(false)}>x</p>
-                            </div>
-                            <h2 className="text-xl font-semibold mb-4">Conclusion Form</h2>
-                            <textarea type='text'
-                                  name='conclusion'
-                                  onChange={handlechange}
-                                  value={values.conclusion}
-                                  required
-                                  placeholder='Enter Conclusion'
-                                  className='p-2 rounded-md '/>
-                            {/* Your conclusion form inputs go here */}
-                            <button onClick={() => handleConclusion(meetings.meetingId)}
-                                    type='submit'
-                                   className="bg-sky-500 text-white px-4 py-2 w-24 rounded-md">Submit</button>
-                          </div>
-                          </div>
-                        )} 
+                    {meetings.map((meeting) => (
+                      <div key={meeting.meetingid}>
+                        {conclusion === meeting.meetingid && (
+                              <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center bg-gray-900 bg-opacity-50">
+                              <div className="bg-white p-10 rounded-md shadow-lg flex flex-col gap-2">
+                                {/* cancle */}
+                                <div className='flex justify-end cursor-pointer'>
+                                  <p className='text-2xl text-white bg-sky-500 rounded-full p-[1px] w-8 text-center' onClick={() => setconclusion(false)}>x</p>
+                                </div>
+                                <h2 className="text-xl font-semibold mb-4">Conclusion Form</h2>
+                                <textarea type='text'
+                                      name='conclusion'
+                                      onChange={handlechange}
+                                      value={values.conclusion}
+                                      required
+                                      placeholder='Enter Conclusion'
+                                      className='p-2 rounded-md '/>
+                                {/* Your conclusion form inputs go here */}
+                                <button onClick={() => handleConclusion(meeting.meetingid, values.conclusion)} type='submit' className="bg-sky-500 text-white px-4 py-2 w-24 rounded-md">Submit</button>
+    
+                              </div>
+                              </div>
+                            )} 
+                        </div>
+                      
+                    ))}
 
                     {loading && 
                             <div className='absolute top-0 left-0 w-full h-full flex items-center justify-center bg-gray-900 bg-opacity-50'>
                               <p className='text-2xl font-semibold tracking-wider text-yellow-400'>Waiting for submission....</p>
                               </div>}
                   </div>
+                 
              </div>
           </div>
       </div>

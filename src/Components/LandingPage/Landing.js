@@ -44,8 +44,13 @@ const Landing = () => {
       setsuccess(true)
       setTimeout(() => {
         setsuccess(false)
+      },2000)
+      setvalues({
+        fullName: '',
+        mobile: '',
+        email: '',
+        message: ''
       })
-      setvalues('')
       console.log('submited', res);
     })
     .catch(err => console.log("failed to submit"));
@@ -201,7 +206,7 @@ const Landing = () => {
             </div>
             <div>
               <button className='f-btn'
-                    type='submit'>Send Request</button>
+                    type='submit' onClick={handlesubmit}>Send Request</button>
             </div>
        
         </form>
