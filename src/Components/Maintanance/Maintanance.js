@@ -1,12 +1,40 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Nav from '../Nav'
 import { TbCoinRupee } from "react-icons/tb";
 import { MdOutlineDateRange } from "react-icons/md";
-
+import axios from 'axios';
 
 const Maintanance = () => {
     const years = ["2022", "2023", "2024"];
     const status = ["Paid", "Dueto", "Rejected"];
+    const [maintanance, setMaintanance] = useState({Paid: [], Unpaid: []})
+
+    useEffect(() => {
+        fetchData("Paid");
+        fetchData("Unpaid");
+    }, []);
+
+
+    //get UNPAID mainenance
+    const fetchData = () => {
+        axios.get(`http://localhost/v1/maintenance/`)
+        .then((res => {
+            if(status === "PAID"){
+                setMaintanance(prevState => ({
+                    ...prevState,
+                    paid: res.data
+                }));
+            }
+            else if(status === "UNPAID"){
+                setMaintanance(prevState => ({
+                    ...prevState,
+                    unpaid: res.data
+                }));
+            }
+        }))
+        .catch(err => console.log("error while fetching maintenance"));
+    }
+    
   return (
    <>
     <div className='bg-gray-900 h-auto'>
@@ -21,8 +49,8 @@ const Maintanance = () => {
                 <div className='flex flex-col gap-3'>
                     <h4>Dues</h4>
                     <p className='text-red-500 '>1200</p>
-                </div>
                 <div className='flex flex-col gap-3'>
+                    </div>
                     <h4>Deposite</h4>
                     <p className='text-center'>0</p>
                 </div>
@@ -72,7 +100,7 @@ const Maintanance = () => {
                     </div>
                     {/* status */}
                     <div className='flex'>
-                        <h2 className=' bg-red-500 text-white rounded-full px-[5px] py-[1px]'>Dueto</h2>
+                        <h2 className=' bg-red-500 text-white rounded-full px-[5px] py-[1px]'>Unpaid</h2>
                     </div>
                     <div className='flex items-center gap-3'>
                         <MdOutlineDateRange className='w-7 h-7 opacity-35'/>
