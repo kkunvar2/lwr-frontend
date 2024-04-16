@@ -30,9 +30,10 @@ const ForgotPassword = () => {
       }
     });
 
+    sessionStorage.setItem("EMAIL", email)
+
       if (response.status === 200) {
-          // localStorage.setItem('token', response.data.token);
-          // saveLoggedInUser();
+        
           navigate("/otp");
           console.log('email verified');
         //   window.location.reload(false)

@@ -6,8 +6,8 @@ const NewPassword = () => {
     
     const navigate = useNavigate();
     const [newPassword, setNewPassword] = useState({
-        newPass: '',
-        confirmPass: ''
+        password: '',
+        cPassword: ''
     })
     const [match, setmatch] = useState(true)
 
@@ -18,7 +18,7 @@ const NewPassword = () => {
             [name]: value,
         }))
 
-        if (newPassword.newPass !== e.target.value) {
+        if (newPassword.password !== e.target.value) {
             setmatch(false);
         } else{
             setmatch(true);
@@ -28,12 +28,7 @@ const NewPassword = () => {
     const handleSubmit = (e) => {
         e.preventDefault()
         if(match){    
-                const token = localStorage.getItem("token")
-                axios.post(`http://localhost:8081/lwresident/v1/`, newPassword, {
-                    headers: {
-                        'Authorization': `Bearer ${token}`
-                    }
-                })
+                axios.patch(`http://localhost:8081/lwresident/v1/forgetPassword/changePassword`, newPassword, {credentials : "include"})
                 .then((res) => {
                     console.log("Password Reset Succesfully");
                     navigate("/log");
@@ -64,9 +59,9 @@ const NewPassword = () => {
                             <div className='input'>
                                 <input className='block w-full px-4 py-2 mt-2 text-gray-400 placeholder-gray-500 bg-gray-800 border rounded-lg focus:focus:border-yellow-300  focus:ring-opacity-40  focus:ring-blue-300' 
                                     type='password' 
-                                    name='newPass'
+                                    name='password'
                                     placeholder='New Password' 
-                                    value={newPassword.newPass} 
+                                    value={newPassword.password} 
                                     onChange={handlePass} />
                             </div>
                         </div>
@@ -75,8 +70,8 @@ const NewPassword = () => {
                                 <input className='block w-full px-4 py-2 mt-2 text-gray-400 placeholder-gray-500 bg-gray-800 border rounded-lg focus:focus:border-yellow-300  focus:ring-opacity-40  focus:ring-blue-300' 
                                     type='password' 
                                     placeholder='Confirm Password' 
-                                    name='confirmPass' 
-                                    value={newPassword.confirmPass} 
+                                    name='cPassword' 
+                                    value={newPassword.cPassword} 
                                     onChange={handlePass} />
                             </div>
                             {!match && <p style={{ color: "#ff6347", fontSize: "13px",  }}>Passwords doesn't match</p>}
