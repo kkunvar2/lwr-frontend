@@ -47,7 +47,7 @@ const  CreateMeetings = () => {
         time: ''
 
       });
-      window.location.reload(false)
+      fetchMeetings();
       console.log("Meeting Scheduled submited successfully");
     })
     .catch(err => console.log('Failed to submit', err));
@@ -56,20 +56,18 @@ const  CreateMeetings = () => {
     //get meetings
     const fetchMeetings = async () => {
       const token = localStorage.getItem('token')
-      await axios.get('http://localhost:8081/lwresident/v1/meetings/view-all',{
+      try {
+        const res = await axios.get('http://localhost:8081/lwresident/v1/meetings/view-all', {
           headers: {
-              'Authorization': `Bearer ${token}` 
-            }
-      })
-      .then((res) => {
-          setmeetings(res.data);
-          console.log(res.data); 
-      })    
-      .catch((error)=> {
-          console.error('Error fetching meetings:', error);
-      }) 
-      
-  };
+            'Authorization': `Bearer ${token}`
+          }
+        });
+        setmeetings(res.data);
+        console.log(res.data);
+      } catch (error) {
+        console.error('Error fetching meetings:', error);
+      }
+    };
 
   //Fetched
   useEffect(() => {    
@@ -94,7 +92,7 @@ const  CreateMeetings = () => {
           }
           return meet;
       }));
-        setconclusion(false)
+        setconclusion(null)
         console.log('Conclusion Submited Successfully')
       })
       .catch((err) => {
@@ -114,7 +112,6 @@ const  CreateMeetings = () => {
      })
     .then(res => {
       setmeetings(meetings.filter(meet => meet.id !== id))
-      window.location.reload(false)
     })
   }
  
@@ -218,7 +215,7 @@ const  CreateMeetings = () => {
                                     </td>
                                     <td  className="px-6 py-4 text-black">
                                         <button className='text-sky-500 hover:text-gray-600 bg-gray-300 p-1 rounded-md'
-                                              onClick={() => setconclusion(meeting.meetimgId)}> Conclusion</button>
+                                              onClick={() => setconclusion(meeting.meetingId)}> Conclusion</button>
                                     </td>
                                     <td  className="px-6 py-4 text-right cursor-pointer">
                                       <FontAwesomeIcon onClick={() => handleDelete(meeting.meetingid)} icon={faTrash} size="lg" style={{ color: "#f66151" }} />    
@@ -230,7 +227,7 @@ const  CreateMeetings = () => {
                     </div>
 
                     {/* conclusion */}
-                    {conclusion && (
+                    {conclusion === meetings.meetingId && (
                           <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center bg-gray-900 bg-opacity-50">
                           <div className="bg-white p-10 rounded-md shadow-lg flex flex-col gap-2">
                             {/* cancle */}
@@ -246,7 +243,7 @@ const  CreateMeetings = () => {
                                   placeholder='Enter Conclusion'
                                   className='p-2 rounded-md '/>
                             {/* Your conclusion form inputs go here */}
-                            <button onClick={() => handleConclusion(meetings.meetimgId)}
+                            <button onClick={() => handleConclusion(meetings.meetingId)}
                                     type='submit'
                                    className="bg-sky-500 text-white px-4 py-2 w-24 rounded-md">Submit</button>
                           </div>
