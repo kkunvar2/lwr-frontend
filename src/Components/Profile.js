@@ -10,14 +10,15 @@ import { useNavigate } from 'react-router-dom';
 const Profile = () => {
     const navigate = useNavigate();
     const [editProfile, setEditProfile] = useState(false)
+    const [userName, setuserName] = useState('')
     const [userData, setuserData] = useState({
         id: '',
         name: '',
         mobile: '',
         email: '',
         password: '',
-        wing: 'c',
-        flat: '01'
+        // wing: 'c',
+        // flat: '01'
       })
     
 
@@ -32,6 +33,7 @@ const Profile = () => {
         })
         .then((res =>{
             setuserData(res.data)
+            setuserName(res.data.name)
         }))
         .catch(err => {
             console.log("User data didn't fetched", err)
@@ -41,8 +43,12 @@ const Profile = () => {
     //Update data
     const handleSubmit = (e) =>{
         e.preventDefault();
-
-        axios.patch('http://localhost:8081/lwresident/v1/member/updateProfile', userData)
+        const token = localStorage.getItem("token")
+        axios.patch('http://localhost:8081/lwresident/v1/member/updateProfile', userData, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
         .then(res => {
           alert("Data updated") 
         })
@@ -58,7 +64,7 @@ const Profile = () => {
     
     const handleChange = (e) => {
         const {name, value} = e.target;
-    setuserData(prevData => ({
+        setuserData(prevData => ({
         ...prevData,
         [name]: value
     }));
@@ -78,7 +84,7 @@ const handleLogout = () =>{
                 <div className='flex py-10 items-center gap-12'>
                     <LuUser2 className='h-24 w-24'/>
                     <div className='flex  flex-col gap-4'>
-                            <h4 className='md:text-5xl text-2xl text-gray-700 font-semibold'>Welcome <span className='text-yellow-500'>{userData.name}</span></h4>
+                            <h4 className='md:text-5xl text-2xl text-gray-700 font-semibold'>Welcome <span className='text-yellow-500'>{userName}</span></h4>
                     
                         <div className='flex gap-1  cursor-pointer'
                             onClick={() => setEditProfile(!editProfile)}>
@@ -127,7 +133,8 @@ const handleLogout = () =>{
                                     onChange={handleChange}/>
                             </div>
                             <button className='bg-blue-500 px-3 h-10 mt-2 shadow-lg rounded-md mx-2 text-white font-semibold hover:bg-gray-700'
-                                type='submit'>Update</button>
+                                type='submit' 
+                                onClick={handleSubmit}>Update</button>
                         </form>
                     </div>
                 }
