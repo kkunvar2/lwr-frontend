@@ -23,7 +23,7 @@ export const isLoggedIn = () => {
 export const isUserRole = () => {
     const isUser = localStorage.getItem('role')
    
-    if(isUser == 'GUARD'){
+    if(isUser == 'GUARD' || 'SECRETARY'){
         return true;
     }
     else{
