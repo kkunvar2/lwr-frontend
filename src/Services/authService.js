@@ -22,9 +22,12 @@ export const isLoggedIn = () => {
 //Guard authority
 export const isUserRole = () => {
     const isUser = localStorage.getItem('role')
-   
-    if(isUser == 'GUARD' || 'SECRETARY'){
+    const isUserSecretory = localStorage.getItem('role')
+    if(isUser == 'GUARD'){
         return true;
+    }
+    else if(isUserSecretory == 'SECRETORY'){
+        return true
     }
     else{
         return false;

@@ -25,6 +25,8 @@ import Otp from './Components/Registration/Otp'
 import NewPassword from './Components/Registration/NewPassword'
 import Page from './Components/Page'
 import AllComplaints from './Components/Complaint/AllComplaints'
+import NoticeBoard from './Components/Dashboard/NoticeBoard'
+import AddNotice from './Components/Admin/AddNotice'
 
 
 export const userTypes = {
@@ -57,14 +59,14 @@ const App = () => {
       <Routes>
 
         {/* Admin */}
-        <Route
+        {/* <Route
           path="/admindashboard"
           element={
             <Authenticated requiredRoles={['ADMIN']}>
               <AdminDashboard />
             </Authenticated>
           }
-        />
+        /> */}
         <Route
           path="/approval"
           element={
@@ -81,13 +83,15 @@ const App = () => {
             </Authenticated>
           }
         />
-        {/* <Route path='/admindashboard' element={<AdminDashboard />}/>
-        <Route path='/users' element={<Users />}/>
+        <Route path='/admindashboard' element={<AdminDashboard />}/>
+        {/* <Route path='/users' element={<Users />}/>
         <Route path='/approval' element={<Approval />}/> */}
-        
+        <Route path='/addNotice' element={<AddNotice />}/>
+
         {/* Landing Page */}
         <Route path='/' element={<Landing />}/>
         <Route path='/page' element={<Page />}/>
+
 
         {/* Login & Signup*/}
         <Route path='/log' element={<Log />}/>
@@ -97,11 +101,12 @@ const App = () => {
         <Route path='/newPassword' element={<NewPassword />}/>
 
         {/* Dashboard */} 
-        <Route path='/dash'  
+        {/* <Route path='/dash'  
             element={ <Authenticated requiredRoles={['MEMBER', 'ADMIN']}>
               <Dashboard />
-            </Authenticated>}/>
-        {/* <Route path='/dash' element={<Dashboard />}/> */}
+            </Authenticated>}/> */}
+        <Route path='/noticeBoard' element={<NoticeBoard />}/>
+        <Route path='/dash' element={<Dashboard />}/>
         
 
         {/* Guest */}
