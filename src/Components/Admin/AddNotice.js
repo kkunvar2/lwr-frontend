@@ -23,7 +23,7 @@ const AddNotice = ({setshow}) => {
       const handleSubmit = (e) => {
         e.preventDefault();
         const token = localStorage.getItem('token')
-        axios.put('http://localhost:8081/v1/lwresient/createNotice', notice, {
+        axios.post('http://localhost:8081/lwresident/v1/notice-board/create', notice, {
             headers: {
                 'Authorization': `Bearer ${token}`               
             }
@@ -36,7 +36,15 @@ const AddNotice = ({setshow}) => {
 
       //clear Form 
       const handleClear = () =>{
-        
+        setNotice({
+            title: "",
+            subtitle: "",
+            description: ""
+          });
+          axios.delete("http://localhost:8081/lwresident/v1/notice-board/create")
+          .then(res => console.log("delete Successfully"))
+          .catch(err => console.log("failed to delete"));
+          setshow(false)
       }
   return (
     <>
@@ -92,7 +100,7 @@ const AddNotice = ({setshow}) => {
                     type='submit'>
                         Submit</button>
                 <button className="block w-full px-4 py-2 font-semibold text-center text-white bg-yellow-400 rounded hover:bg-yellow-500 focus:bg-black focus:outline-none"
-                    onClick={handleClear}>
+                    onClick={handleClear} type='reset'>
                         Clear</button>
                 </div>
             </form>

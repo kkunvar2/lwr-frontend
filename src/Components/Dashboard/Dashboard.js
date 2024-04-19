@@ -33,16 +33,17 @@ const Dashboard = () => {
     //Getting NoticeBoard
     const fetchNotice = async() => {
         try {
-            const res = axios.get("http://localhost:8081/lwresident/v1/member/getUse")
+            const res = axios.get("http://localhost:8081/lwresident/v1/notice-board/view")
             if(res.ok){
                 setnotice(res.data)
-                if(notice === []){
+                if(notice.length === 0){
                     setalert(true)
                 }
                 else{
                     setalert(false)
                 }
             }
+            console.log(notice.length);
         }
         catch(error){
             console.log('Notice data didn"t get');
