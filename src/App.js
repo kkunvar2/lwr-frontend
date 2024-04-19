@@ -25,8 +25,6 @@ import Otp from './Components/Registration/Otp'
 import NewPassword from './Components/Registration/NewPassword'
 import Page from './Components/Page'
 import AllComplaints from './Components/Complaint/AllComplaints'
-import NoticeBoard from './Components/Dashboard/NoticeBoard'
-import AddNotice from './Components/Admin/AddNotice'
 
 
 export const userTypes = {
@@ -34,7 +32,7 @@ export const userTypes = {
   MEMBER: "MEMBER",
   GUARD: "GUARD",
   COMMITTEE: "COMMITTEE",
-  SECRETARY: "SECRETARY"
+  SECRETORY: "SECRETORY"
   
 }
 const App = () => {
@@ -59,14 +57,14 @@ const App = () => {
       <Routes>
 
         {/* Admin */}
-        {/* <Route
+        <Route
           path="/admindashboard"
           element={
-            <Authenticated requiredRoles={['ADMIN']}>
+            <Authenticated requiredRoles={['ADMIN', 'SECRETORY']}>
               <AdminDashboard />
             </Authenticated>
           }
-        /> */}
+        />
         <Route
           path="/approval"
           element={
@@ -83,15 +81,13 @@ const App = () => {
             </Authenticated>
           }
         />
-        <Route path='/admindashboard' element={<AdminDashboard />}/>
-        {/* <Route path='/users' element={<Users />}/>
+        {/* <Route path='/admindashboard' element={<AdminDashboard />}/>
+        <Route path='/users' element={<Users />}/>
         <Route path='/approval' element={<Approval />}/> */}
-        <Route path='/addNotice' element={<AddNotice />}/>
-
+        
         {/* Landing Page */}
         <Route path='/' element={<Landing />}/>
         <Route path='/page' element={<Page />}/>
-
 
         {/* Login & Signup*/}
         <Route path='/log' element={<Log />}/>
@@ -101,32 +97,31 @@ const App = () => {
         <Route path='/newPassword' element={<NewPassword />}/>
 
         {/* Dashboard */} 
-        {/* <Route path='/dash'  
-            element={ <Authenticated requiredRoles={['MEMBER', 'ADMIN']}>
+        <Route path='/dash'  
+            element={ <Authenticated requiredRoles={['MEMBER', 'ADMIN', 'GUARD']}>
               <Dashboard />
-            </Authenticated>}/> */}
-        <Route path='/noticeBoard' element={<NoticeBoard />}/>
-        <Route path='/dash' element={<Dashboard />}/>
+            </Authenticated>}/>
+        {/* <Route path='/dash' element={<Dashboard />}/> */}
         
 
         {/* Guest */}
         <Route path='/guest' 
-            element={<Authenticated requiredRoles={['GUARD', 'ADMIN', 'SECRETARY']}>
+            element={<Authenticated requiredRoles={['GUARD', 'ADMIN', 'SECRETORY']}>
               <Guest/>
             </Authenticated>}/>
         
         <Route path='/guestform' 
-            element={<Authenticated requiredRoles={['GUARD', 'ADMIN', 'SECRETARY']}>
+            element={<Authenticated requiredRoles={['GUARD', 'ADMIN', 'SECRETORY']}>
               <GuestForm/>
             </Authenticated>}/>
         
         <Route path='/guestreport' 
-            element={<Authenticated requiredRoles={['GUARD', 'ADMIN', 'SECRETARY']}>
+            element={<Authenticated requiredRoles={['GUARD', 'ADMIN', 'SECRETORY']}>
             <GuestReport/>
           </Authenticated>}/>
 
         <Route path='/guestrecords' 
-            element={<Authenticated requiredRoles={['GUARD', 'ADMIN', 'SECRETARY']}>
+            element={<Authenticated requiredRoles={['GUARD', 'ADMIN', 'SECRETORY']}>
             <GuestRecords/>
          </Authenticated>}/>
 

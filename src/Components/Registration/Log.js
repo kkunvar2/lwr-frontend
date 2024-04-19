@@ -73,7 +73,7 @@ const Log = () => {
                     case userTypes.COMMITTEE:
                         navigate("/adminDashboard");
                         break;
-                    case userTypes.SECRETARY:
+                    case userTypes.SECRETORY:
                         navigate("/adminDashboard");
                         break;     
                     default:
