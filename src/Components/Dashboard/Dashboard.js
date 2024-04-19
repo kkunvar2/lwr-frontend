@@ -4,7 +4,13 @@ import { Link } from 'react-router-dom'
 import { isUserRole } from '../../Services/authService'
 import axios from 'axios'
 
+import { FaBell } from "react-icons/fa6";
+import NoticeBoard from './NoticeBoard'
+
 const Dashboard = () => {
+
+    const isGuard = isUserRole();
+    const [showNoticeboard, setshowNoticeboard] = useState(false)
     const [username, setusername] = useState('')
     const [accordion, setaccordion] = useState({
         complaints: false,
@@ -25,18 +31,22 @@ const Dashboard = () => {
     useEffect(() => {
         gettingUsername();
     }, [])
-    const isGuard = isUserRole();
     
-  return (
-   <>
+    
+    
+    const openNoticeBoard = () => {
+        setshowNoticeboard(!showNoticeboard)
+    }
+    return (
+        <>
    <div className='h-auto md:h-screen bg-slate-300'>   
    <div>
     <Nav/>
    </div>
     <div className=' flex items-center justify-center flex-col pb-6'>
             <h1 className='text-5xl font-bold mt-10 text-slate-400'>Welcome {username}</h1>
+            {showNoticeboard && <NoticeBoard setshowNoticeboard={setshowNoticeboard} />}  
             <div className='grid sm:grid-cols-2 grid-cols-1 mt-12 gap-10 '>
-                                
                 {/* Maintanance */}
                 {!isGuard &&
                     <Link to='/memMaintanance'>
@@ -82,7 +92,6 @@ const Dashboard = () => {
                         <p className='font-normal tracking-wide italic'>See Upcoming meetings</p>
                     </div>
                 </Link>
-                
                 {/* Events */}
                 {!isGuard &&
                     <Link to='/memevent'>
@@ -122,6 +131,7 @@ const Dashboard = () => {
                     </div>
                     </div> 
                 }
+                    
                 
             </div>
             <Link to='/feed'>
@@ -129,6 +139,11 @@ const Dashboard = () => {
                     <button className='bg-yellow-500 py-2 text-white px-3 rounded-md font-semibold'>Feedback</button>
                 </div>
             </Link>
+            <div className='fixed bottom-3 right-3 md:bottom-14 bg-black p-2 rounded-full '
+                >
+                <FaBell className='h-7 w-7 text-white rotate-12'
+                    onClick={openNoticeBoard}/>
+            </div>
         </div>
     </div>
    </>

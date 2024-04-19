@@ -30,7 +30,7 @@ const Sidebar = () => {
       navigate('/log')
     }
 
-    const isUser = isUserRole();
+    const isUserSecretory = isUserRole();
 
   return (
     <>
@@ -63,7 +63,7 @@ const Sidebar = () => {
             </div>
 
             {/* Approval */}
-            {!isUser &&   
+            {!isUserSecretory &&   
               <div
                 className="flex items-center justify-between py-3 px-2 transform transition duration-200 hover:scale-105 text-gray-400 hover:text-white hover:bg-gray-400 hover:rounded-2xl rounded-2xl"
                 onClick={handelApproval}

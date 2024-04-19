@@ -62,10 +62,11 @@ const AllBookings = () => {
                         </div>
                     <div className="rounded-lg overflow-x-auto pb-4 h-[30rem] bg-slate-700">
                         <table className=" sm:w-full px-12 h-[20px] min-w-max text-sm text-left  text-gray-500 dark:text-gray-400">
-                            <thead className=" sticky text-lg text-sky-400 uppercase bg-gray-100 shadow-xl">
+                            <thead className=" sticky text-lg text-sky-500 uppercase bg-gray-100 shadow-xl">
                                 <tr className=' '>
                                     <th className="px-6 py-3">ID</th>
                                     <th className="px-6 py-3">Type</th>
+                                    <th className="px-6 py-3">date</th>
                                     <th className="px-6 py-3">Name</th>
                                     <th className="px-6 py-3">Date From</th>
                                     <th className="px-6 py-3">Date To</th>
@@ -79,26 +80,28 @@ const AllBookings = () => {
                                             {book.funcid}
                                         </td>
                                         <td className="px-6 py-4">{book.funcType}</td>
-                                        <td className="px-6 py-4">{book.name}</td>
-                                        <td className="px-6 py-4">{moment(book.dateFrom).format('YYYY-MM-DD')}</td>
-                                        <td className="px-6 py-4">{moment(book.dateTo).format('YYYY-MM-DD')}</td>
+                                        <td className="px-6 py-4">{moment(book.bookDate).format('YYYY-MM-DD')}</td>
+                                        <td className="px-6 py-4">{book.memId.name}</td>
+                                        <td className="px-6 py-4 font-medium text-yellow-400">{moment(book.dateFrom).format('YYYY-MM-DD')}</td>
+                                        <td className="px-6 py-4 font-medium text-yellow-400">{moment(book.dateTo).format('YYYY-MM-DD')}</td>
                                         <td className="px-6 py-4">
                                             <MdDeleteForever className='text-red-700 w-6 h-6' 
                                                             onClick={() => cancelEvent(book.funcid)} />
                                         </td>
                                     </tr>
                                 ))}
-                                {/* <tr className="border-b  hover:bg-slate-300 text-">
-                                        <td className="px-6 py-4 font-semibold text-gray-900 whitespace-nowrap dark:text-white">
-                                            <p className=' text-gray-900 text-lg rounded-full'>12</p>
+                                    {/* <tr className="border-b hover:bg-slate-300">
+                                        <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                            12
                                         </td>
-                                        <td className="px-6 py-4 text-gray-900  ">Birthday</td>
-                                        <td className="px-6 py-4 text-gray-900  ">Dixit Vara</td>
-                                        <td className="px-6 py-4 text-black font-medium text-md">2024-04-12</td>
-                                        <td className="px-6 py-4 text-black font-medium text-md">2024-04-15</td>
+                                        <td className="px-6 py-4">Party</td>
+                                        <td className="px-6 py-4">2024-04-18</td>
+                                        <td className="px-6 py-4">Dixit</td>
+                                        <td className="px-6 py-4 font-medium text-yellow-400">2024-04-19</td>
+                                        <td className="px-6 py-4 font-medium text-yellow-400">2024-04-22</td>
                                         <td className="px-6 py-4">
                                             <MdDeleteForever className='text-red-700 w-6 h-6' 
-                                                            onClick={() => cancelEvent()} />
+                                                            onClick=''/>
                                         </td>
                                     </tr> */}
                             </tbody>
