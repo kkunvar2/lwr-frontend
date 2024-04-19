@@ -11,7 +11,9 @@ const Dashboard = () => {
 
     const isGuard = isUserRole();
     const [showNoticeboard, setshowNoticeboard] = useState(false)
+    const [alert, setalert] = useState(false)
     const [username, setusername] = useState('')
+    const [notice, setnotice] = useState([])
     const [accordion, setaccordion] = useState({
         complaints: false,
         chekIn: false
@@ -27,13 +29,36 @@ const Dashboard = () => {
         .then(res => setusername(res.data.name))
         .catch(err => console.log("didn't get username"));
     }
+    
+    //Getting NoticeBoard
+    const fetchNotice = async() => {
+        try {
+            const res = axios.get("http://localhost:8081/lwresident/v1/member/getUse")
+            if(res.ok){
+                setnotice(res.data)
+                if(notice === []){
+                    setalert(true)
+                }
+                else{
+                    setalert(false)
+                }
+            }
+        }
+        catch(error){
+            console.log('Notice data didn"t get');
+        }
+    }
+
 
     useEffect(() => {
         gettingUsername();
     }, [])
     
+    // useEffect(() => {
+    //     fetchNotice();
+    // }, [])
     
-    
+
     const openNoticeBoard = () => {
         setshowNoticeboard(!showNoticeboard)
     }
@@ -45,7 +70,7 @@ const Dashboard = () => {
    </div>
     <div className=' flex items-center justify-center flex-col pb-6'>
             <h1 className='text-5xl font-bold mt-10 text-slate-400'>Welcome {username}</h1>
-            {showNoticeboard && <NoticeBoard setshowNoticeboard={setshowNoticeboard} />}  
+            {showNoticeboard && <NoticeBoard setshowNoticeboard={setshowNoticeboard} open={true} />}  
             <div className='grid sm:grid-cols-2 grid-cols-1 mt-12 gap-10 '>
                 {/* Maintanance */}
                 {!isGuard &&
@@ -143,6 +168,9 @@ const Dashboard = () => {
                 >
                 <FaBell className='h-7 w-7 text-white rotate-12'
                     onClick={openNoticeBoard}/>
+                    {alert && 
+                        <p className=' absolute right-0 top-0 bg-sky-600 text-sky-500 rounded-full h-3 w-3' content=''></p>
+                    }
             </div>
         </div>
     </div>

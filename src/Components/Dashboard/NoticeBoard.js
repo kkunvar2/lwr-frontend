@@ -1,14 +1,14 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 
-const NoticeBoard = ({setshowNoticeboard}) => {
+const NoticeBoard = ({setshowNoticeboard, open}) => {
 
     const [noticeboard, setnoticeboard] = useState([])
 
     const fetchNotice = async() => {
         try{
            const res = await axios.get("http://localhost:8081/lwresident/v1/notice")
-           if(res.ok){
+           if(res.status === 200){
             setnoticeboard(res.data)
            }
         }
@@ -24,8 +24,8 @@ const NoticeBoard = ({setshowNoticeboard}) => {
     return (
         <>
         <div className="absolute inset-0 bg-gray-900 bg-opacity-50 backdrop-filter backdrop-blur-sm"></div>
-        <div className=' absolute flex items-center justify-center h-screen '>
-            <div className="max-w-xs overflow-hidden bg-gray-800 rounded-lg shadow-xl">
+        <div className="absolute flex items-center justify-center h-screen transition-opacity duration-100">
+            <div className="max-w-xs overflow-hidden bg-gray-800 rounded-lg shadow-xl ">
                 <div className="px-6 py-4 bg-gradient-to-r from-yellow-400 to-yellow-200">
                     <h2 className="text-2xl font-semibold text-gray-100">Noticeboard</h2>
                     <p className="text-gray-800">Perfect for professionals</p>

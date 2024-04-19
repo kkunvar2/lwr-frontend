@@ -6,6 +6,7 @@ import axios from 'axios';
 import { PiUsersBold } from "react-icons/pi";
 import { PiUsersThree } from "react-icons/pi";
 import Sidebar from './Sidebar';
+import AddNotice from './AddNotice';
 
 const AdminDashboard = () => {
 
@@ -13,6 +14,8 @@ const AdminDashboard = () => {
     members: 0,
     secretaries: 0
   })
+
+  const [show, setshow] = useState(false)
 
   useEffect(() => {
     axios.get('http://localhost:8081/lwresident/v1/admin/members')
@@ -28,6 +31,8 @@ const AdminDashboard = () => {
     }).catch(err => console.log("fetching failed"))
 
   },[])
+
+
   
   return (
     <>
@@ -36,8 +41,15 @@ const AdminDashboard = () => {
         {/* Main Panel */}  
         <div className="w-full lg:flex-1 p-2 ">
             {/* <Nav/> */}
+            <div className='px-4 flex justify-between items-center'>
+              <h1 className='font-semibold text-gray-400 text-4xl py-4'>Dashboard</h1>
+              <button className='px-5 py-1 bg-gradient-to-l from-yellow-400 to-yellow-200 text-white rounded-md font-medium hover:scale-110 duration-300'
+                    onClick={() => setshow(!show)}>
+                Create Notice +</button>
+            </div>
+
+
             {/* content */}
-            <h1 className='font-semibold text-gray-400 text-4xl py-4'>Dashboard</h1>
             <div className=' px-16 py-12'>
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
               
@@ -62,6 +74,12 @@ const AdminDashboard = () => {
                   {count.members}+
                 </div>
               </div>
+
+              {/* Notice Board */}
+              {show && 
+                <div className=''>
+                  <AddNotice setshow={setshow}/>
+                  </div>}
 
               {/* Card 3 */}
               {/* <div className=" flex-col bg-gradient-to-l from-orange-500 to-orange-300 p-4 rounded-lg shadow-lg flex items-center justify-center h-[12rem] transform transition duration-300  hover:scale-105">
