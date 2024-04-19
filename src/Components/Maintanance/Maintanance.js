@@ -18,15 +18,15 @@ const Maintanance = () => {
 
     //get UNPAID mainenance
     const fetchData = () => {
-        axios.get(`http://localhost/v1/maintenance/`)
+        axios.get(`http://localhost:8081/lwresident/v1/maintenance/generate`)
         .then((res => {
-            if(status === "PAID"){
+            if(status == "PAID"){
                 setMaintanance(prevState => ({
                     ...prevState,
                     paid: res.data
                 }));
             }
-            else if(status === "UNPAID"){
+            else if(status == "UNPAID"){
                 setMaintanance(prevState => ({
                     ...prevState,
                     unpaid: res.data

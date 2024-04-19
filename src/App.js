@@ -32,7 +32,7 @@ export const userTypes = {
   MEMBER: "MEMBER",
   GUARD: "GUARD",
   COMMITTEE: "COMMITTEE",
-  SECRETARY: "SECRETARY"
+  SECRETORY: "SECRETORY"
   
 }
 const App = () => {
@@ -60,7 +60,7 @@ const App = () => {
         <Route
           path="/admindashboard"
           element={
-            <Authenticated requiredRoles={['ADMIN']}>
+            <Authenticated requiredRoles={['ADMIN', 'SECRETORY']}>
               <AdminDashboard />
             </Authenticated>
           }
@@ -98,7 +98,7 @@ const App = () => {
 
         {/* Dashboard */} 
         <Route path='/dash'  
-            element={ <Authenticated requiredRoles={['MEMBER', 'ADMIN']}>
+            element={ <Authenticated requiredRoles={['MEMBER', 'ADMIN', 'GUARD']}>
               <Dashboard />
             </Authenticated>}/>
         {/* <Route path='/dash' element={<Dashboard />}/> */}
@@ -106,22 +106,22 @@ const App = () => {
 
         {/* Guest */}
         <Route path='/guest' 
-            element={<Authenticated requiredRoles={['GUARD', 'ADMIN', 'SECRETARY']}>
+            element={<Authenticated requiredRoles={['GUARD', 'ADMIN', 'SECRETORY']}>
               <Guest/>
             </Authenticated>}/>
         
         <Route path='/guestform' 
-            element={<Authenticated requiredRoles={['GUARD', 'ADMIN', 'SECRETARY']}>
+            element={<Authenticated requiredRoles={['GUARD', 'ADMIN', 'SECRETORY']}>
               <GuestForm/>
             </Authenticated>}/>
         
         <Route path='/guestreport' 
-            element={<Authenticated requiredRoles={['GUARD', 'ADMIN', 'SECRETARY']}>
+            element={<Authenticated requiredRoles={['GUARD', 'ADMIN', 'SECRETORY']}>
             <GuestReport/>
           </Authenticated>}/>
 
         <Route path='/guestrecords' 
-            element={<Authenticated requiredRoles={['GUARD', 'ADMIN', 'SECRETARY']}>
+            element={<Authenticated requiredRoles={['GUARD', 'ADMIN', 'SECRETORY']}>
             <GuestRecords/>
          </Authenticated>}/>
 
