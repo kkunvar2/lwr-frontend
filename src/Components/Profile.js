@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Nav from './Nav'
 import { LuUser2 } from "react-icons/lu";
 import { FaPen } from "react-icons/fa";
@@ -9,8 +9,13 @@ import { useNavigate } from 'react-router-dom';
 
 const Profile = () => {
     const navigate = useNavigate();
-    const [editProfile, setEditProfile] = useState(false)
+    const fileInputRef = useRef(null);  
+    const [editProfile, setEditProfile] = useState({
+        profile: false,
+        imgSave: false
+    })
     const [userName, setuserName] = useState('')
+    const [userImage, setUserImage] = useState(null)
     const [userData, setuserData] = useState({
         id: '',
         name: '',
@@ -59,7 +64,7 @@ const Profile = () => {
     useEffect(() =>{
         fetchData()
         console.log('profile')
-    }, [editProfile])
+    }, [editProfile.profile])
 
     
     const handleChange = (e) => {
@@ -69,6 +74,36 @@ const Profile = () => {
         [name]: value
     }));
 }
+
+    //Update Profile
+    const handleImageChange = (e) => {
+        setUserImage(e.target.files[0]);
+        setEditProfile({...editProfile, imgSave: true})
+    };
+
+    //Updating 
+    const handleSaveProfile = () => {
+        const formData = new FormData();
+        if (userImage) {
+            formData.append('profileImage', userImage); 
+        }
+
+        const token = localStorage.getItem("token");
+        axios.patch('http://localhost:8081/lwresident/v1/member/updateProfile', formData, {
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'multipart/form-data' 
+            }
+        })
+        .then((res) => {
+            console.log("Profile Uploaded");
+            setEditProfile({
+                ...editProfile,
+                imgSave: false
+            })
+        })
+        .catch(err => console.log("profile failed"));
+    }
 
 //Logout
 const handleLogout = () =>{
@@ -81,13 +116,36 @@ const handleLogout = () =>{
         <div className='bg-slate-200 h-screen'>
             <Nav/>
             <div className='md:px-24 px-3'>
-                <div className='flex py-10 items-center gap-12'>
-                    <LuUser2 className='h-24 w-24'/>
+                <div className='flex py-10 items-center gap-6'>
+                    <div className='flex flex-col relative'>
+                         <img src={userImage ? URL.createObjectURL(userImage) : <LuUser2/>} className='h-24 w-24 rounded-full' />
+                            <button
+                                className='absolute bottom-0 right-0 bg-gray-300 p-1 rounded-full hover:bg-gray-400'
+                                onClick={() => fileInputRef.current.click()}>
+                                <FaPen className='h-6 w-6 text-gray-700' />
+                            </button>
+                          
+                            <input
+                                ref={fileInputRef}
+                                type='file'
+                                className='hidden'
+                                onChange={handleImageChange}
+                            />
+                        </div>
+                    {editProfile.imgSave && (
+                        <button
+                            className='bg-blue-500 px-3 h-10 mt-2 shadow-lg rounded-md mx-2 text-white font-semibold hover:bg-gray-700'
+                            type='button' 
+                            onClick={handleSaveProfile}>
+                                    Save
+                                </button>
+                    )}
+
                     <div className='flex  flex-col gap-4'>
-                            <h4 className='md:text-5xl text-2xl text-gray-700 font-semibold'>Welcome <span className='text-yellow-500'>{userName}</span></h4>
+                        <h4 className='md:text-5xl text-2xl text-gray-700 font-semibold'>Welcome <span className='text-yellow-500'>{userName}</span></h4>
                     
                         <div className='flex gap-1  cursor-pointer'
-                            onClick={() => setEditProfile(!editProfile)}>
+                            onClick={() => setEditProfile({...editProfile, profile: !editProfile.profile })}>
                             <p className='text-yellow-500 hover:text-gray-600'>Edit Profile</p>
                             <FaPen className='text-yellow-500'/>
                         </div>
@@ -95,9 +153,10 @@ const handleLogout = () =>{
                 </div>
 
                 {/* edit profile */}
-                <h1 className='font-bold mb-2 text-gray-700'>Edit Profile</h1>
                 <div className='flex flex-col '>
-                {editProfile &&
+                {editProfile.profile &&
+                <>
+                <h1 className='font-bold mb-2 text-gray-700'>Edit Profile</h1>
                     <div className='bg-gray-100 py-4 px-3 rounded-md '>
                         <form onSubmit={handleSubmit} className='grid grid-cols-2 gap-5'>
                             <div className='flex flex-col text-sm gap-2'>    
@@ -137,6 +196,7 @@ const handleLogout = () =>{
                                 onClick={handleSubmit}>Update</button>
                         </form>
                     </div>
+                </> 
                 }
                 </div>
                 <div>
