@@ -78,25 +78,25 @@ const Approval = () => {
                             </div>
 
                             { userList.map((user) => (    
-                                <div key={user.id} className=' flex items-center justify-between bg-gray-50 p-5 rounded-md shadow-md'>
+                                <div key={user.srNo} className=' flex items-center justify-between bg-gray-50 p-5 rounded-md shadow-md'>
                                     <div className='flex md:gap-12 gap-6 items-center md:w-[32rem]'>
-                                        <h2 className=' font-medium'>{user.id}</h2>
+                                        <h2 className=' font-medium'>{user.srNo}</h2>
                                         <div className='flex flex-col gap-1 w-[45%] md:w-[19%]'>
-                                            <h2 className='text-sm font-semibold bg-yellow-400 p-[2.5px] text-white text-center rounded-full'>{user.name}</h2>
-                                            <p className='text-[12px]'>Date: {user.date}</p>
+                                            <h2 className='text-sm font-semibold bg-yellow-400 p-[2.5px] text-white text-center rounded-full'>{user.member.name}</h2>
+                                            <p className='text-[12px]'>Date: {user.requestDate}</p>
                                         </div>
                                         <p className='text-[12px] md:text-[15px] tracking-widest font-medium text-slate-400 '>
-                                            {user.status == "APPROVED" ? `Approved for ${<span className='text-gray-500'>{user.role}</span>}` 
-                                            : `Requesting for ${user.role}`} role...
+                                            {user.status === "APPROVED" ? `Approved for ${<span className='text-gray-500'>{user.role}</span>}` 
+                                            : `Requesting for ${user.requestedRole}`} role...
                                         </p>
                                     </div>
                                     <div className='flex gap-4 justify-center'>
                                         <img src={accept}
-                                            onClick={() => handleAccept(user.id)}
+                                            onClick={() => handleAccept(user.srNo)}
                                             title='Accept'
                                             className='w-7 h-7 cursor-pointer'/>
                                         <img src={reject}
-                                            onClick={() => handleReject(user.id)}
+                                            onClick={() => handleReject(user.srNo)}
                                             title='Reject'
                                             className='w-7 h-7 cursor-pointer'/>
                                     </div>

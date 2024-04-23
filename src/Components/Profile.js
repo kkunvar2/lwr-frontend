@@ -25,7 +25,7 @@ const Profile = () => {
         // wing: 'c',
         // flat: '01'
       })
-    
+
 
     //Retrieve Data
     const fetchData = async() =>{
@@ -85,11 +85,11 @@ const Profile = () => {
     const handleSaveProfile = () => {
         const formData = new FormData();
         if (userImage) {
-            formData.append('profileImage', userImage); 
+            formData.append('photo', userImage); 
         }
 
         const token = localStorage.getItem("token");
-        axios.patch('http://localhost:8081/lwresident/v1/member/updateProfile', formData, {
+        axios.patch('http://localhost:8081/lwresident/v1/member/update-profile-pic', formData, {
             headers: {
                 'Authorization': `Bearer ${token}`,
                 'Content-Type': 'multipart/form-data' 
