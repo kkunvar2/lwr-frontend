@@ -118,7 +118,14 @@ const handleLogout = () =>{
             <div className='md:px-24 px-3'>
                 <div className='flex py-10 items-center gap-6'>
                     <div className='flex flex-col relative'>
-                         <img src={userImage ? URL.createObjectURL(userImage) : <LuUser2/>} className='h-24 w-24 rounded-full' />
+                    {userImage ? (
+                        <img
+                            src={URL.createObjectURL(userImage)}
+                            className="h-24 w-24 rounded-full"
+                        />
+                        ) : (
+                        <LuUser2 className="h-24 w-24 rounded-full" />
+                    )}
                             <button
                                 className='absolute bottom-0 right-0 bg-gray-300 p-1 rounded-full hover:bg-gray-400'
                                 onClick={() => fileInputRef.current.click()}>
@@ -128,6 +135,7 @@ const handleLogout = () =>{
                             <input
                                 ref={fileInputRef}
                                 type='file'
+                                name='photo'
                                 className='hidden'
                                 onChange={handleImageChange}
                             />
