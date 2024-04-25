@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import readImage from '../../Services/readImage'
 
@@ -8,6 +8,7 @@ const ComplaintForm = () => {
     const [image, setImage] = useState(null)
 
     const navigate = useNavigate();
+    const form = useRef();
     const [values, setValues] = useState({
         title: '',
         description: ''
@@ -16,7 +17,7 @@ const ComplaintForm = () => {
     //image change
     const fileChange = async (e) => {
         const imageString = await readImage(e.target.files[0]);
-        // console.log(imageString);
+        console.log(imageString);
         setImage(imageString);
     }
 
@@ -25,13 +26,23 @@ const ComplaintForm = () => {
         e.preventDefault()
         try {
             const token = localStorage.getItem('token')
+            const formData = new FormData(form.current);
+
+            //append Data
+            // formData.append('title', values.title)
+            // formData.append('description', values.description)
+
+            if(image){
+                formData.append('photo', image);
+            }
+            
             const response = await fetch('http://localhost:8081/lwresident/v1/complaint/newComplaint', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json',
+                    // 'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`
                 },
-                body: JSON.stringify(values),
+                body: formData,
             });
             if (response.ok) {
                 setImage(null)
@@ -71,7 +82,8 @@ const ComplaintForm = () => {
                     </div>
 
                     <form className="lg:w-2/6 md:w-1/2 bg-gray-800 bg-opacity-50 rounded-lg p-8 flex flex-col md:ml-auto w-full mt-10 md:mt-0"
-                        onSubmit={handleSubmit}>
+                        onSubmit={handleSubmit}
+                        ref={form}>
                         <h2 className="text-white text-lg font-medium title-font mb-5">Form</h2>
                         <div className='flex items-center justify-center w-full'>
                             {!image ? (
@@ -131,8 +143,8 @@ const ComplaintForm = () => {
                                             className="z-10"
                                             onClick={() => {
                                                 setImage(null);
-                                                // form.current[0].value =
-                                                //     null;
+                                                form.current[0].value =
+                                                    null;
                                             }}
                                         >
                                             <path d="M21 9v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7" />
