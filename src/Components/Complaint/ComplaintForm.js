@@ -65,7 +65,7 @@ const ComplaintForm = () => {
                         <p className="leading-relaxed mt-4">Complaints are related to our Residential like parking, resident members, your personal problem. we are try our best. <span className='text-yellow-500'>Have great day</span> </p>
                         <div className='flex justify-center '>
                     <Link to='/dash'>
-                        <button className='bg-white p-3 rounded-full text-black font-semibold shadow-lg shadow-gray-600'>Go Back</button>
+                        <button  className='bg-white p-3 rounded-full text-black font-semibold shadow-lg shadow-gray-600'>Go Back</button>
                     </Link>
                 </div>
                     </div>
