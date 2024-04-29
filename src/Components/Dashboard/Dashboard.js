@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { isUserRole } from '../../Services/authService'
 import axios from 'axios'
 
+import { HiUserGroup } from "react-icons/hi2";
 import { FaBell } from "react-icons/fa6";
 import NoticeBoard from './NoticeBoard'
 
@@ -31,29 +32,34 @@ const Dashboard = () => {
     }
     
     //Getting NoticeBoard
-    const fetchNotice = async() => {
+    const fetchNotice = async () => {
         try {
-            const res = axios.get("http://localhost:8081/lwresident/v1/notice-board/view")
-            if(res.ok){
-                setnotice(res.data)
-                if(notice.length === 0){
-                    setalert(true)
-                }
-                else{
-                    setalert(false)
-                }
+            const res = await axios.get("http://localhost:8081/lwresident/v1/notice-board/view");
+            if (res.data.length > 0) {
+                setnotice(res.data);
+                setalert(true);
+            } else {
+                setalert(false);
             }
-            console.log(notice.length);
+        } catch (error) {
+            console.log('Notice data did not get');
         }
-        catch(error){
-            console.log('Notice data didn"t get');
-        }
-    }
+    };
 
 
     useEffect(() => {
         gettingUsername();
+        fetchNotice();
     }, [])
+
+    // Check notice length when notice state changes
+    useEffect(() => {
+        if (notice.length > 0) {
+            setalert(true);
+        } else {
+            setalert(false);
+        }
+    }, [notice]);
     
     // useEffect(() => {
     //     fetchNotice();
@@ -165,6 +171,8 @@ const Dashboard = () => {
                     <button className='bg-yellow-500 py-2 text-white px-3 rounded-md font-semibold'>Feedback</button>
                 </div>
             </Link>
+
+            {/* NoitceBoard */}
             <div className='fixed bottom-3 right-3 md:bottom-14 bg-black p-2 rounded-full '
                 >
                 <FaBell className='h-7 w-7 text-white rotate-12'
@@ -172,6 +180,13 @@ const Dashboard = () => {
                     {alert && 
                         <p className=' absolute right-0 top-0 bg-sky-600 text-sky-500 rounded-full h-3 w-3' content=''></p>
                     }
+            </div>
+            
+            {/* Request for posts */}
+            <div className='fixed bottom-20 right-3 md:bottom-28 bg-black p-2 rounded-full '
+                >
+                <HiUserGroup className='text-white h-7 w-7'
+                onClick=''/>
             </div>
         </div>
     </div>

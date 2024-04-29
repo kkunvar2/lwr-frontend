@@ -97,11 +97,11 @@ const App = () => {
         <Route path='/newPassword' element={<NewPassword />}/>
 
         {/* Dashboard */} 
-        <Route path='/dash'  
+        {/* <Route path='/dash'  
             element={ <Authenticated requiredRoles={['MEMBER', 'ADMIN', 'GUARD']}>
               <Dashboard />
-            </Authenticated>}/>
-        {/* <Route path='/dash' element={<Dashboard />}/> */}
+            </Authenticated>}/> */}
+        <Route path='/dash' element={<Dashboard />}/>
         
 
         {/* Guest */}
