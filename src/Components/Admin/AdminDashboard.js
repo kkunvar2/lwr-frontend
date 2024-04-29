@@ -12,7 +12,9 @@ const AdminDashboard = () => {
 
   const [count, setcount] = useState({
     members: 0,
-    secretaries: 0
+    secretaries: 0,
+    guards: 0,
+    committee: 0
   })
 
   const [show, setshow] = useState(false)
@@ -22,10 +24,14 @@ const AdminDashboard = () => {
     .then((res)=> {
       const secretary = res.data.filter(user => user.role === 'SECRETORY');
       const member = res.data.filter(user => user.role === 'MEMBER');
+      const guards = res.data.filter(user => user.role === 'GUARD');
+      const committee = res.data.filter(user => user.role === 'COMMITTEE');
 
       setcount({
         members: member.length,
-        secretaries: secretary.length 
+        secretaries: secretary.length,
+        guards: guards.length, 
+        committee: committee.length 
       })
 
     }).catch(err => console.log("fetching failed"))
@@ -75,6 +81,27 @@ const AdminDashboard = () => {
                 </div>
               </div>
 
+              {/* Card 3 */}
+              <div className="flex-col bg-gradient-to-l from-yellow-400 to-yellow-200 p-4 rounded-lg shadow-lg flex items-center justify-center gap-4 h-[12rem] transform transition duration-300  hover:scale-105">
+                <div className='flex items-center gap-2'>
+                  <PiUsersBold className='w-10 h-10' />
+                  <h2 className='text-2xl'>Guards</h2>
+                </div>
+                <div className='text-5xl font-bold text-white'>
+                  {count.guards}+
+                </div>
+              </div>
+
+              {/* Card 4 */}
+              <div className="flex-col bg-gradient-to-l from-blue-500 to-blue-300 p-4 rounded-lg shadow-lg flex items-center justify-center gap-4 h-[12rem] transform transition duration-300  hover:scale-105">
+                <div className='flex items-center gap-5'>
+                    <PiUsersThree className='w-12 h-12' />
+                    <h2 className='text-2xl'>Committee</h2>
+                </div>
+                  <div className='text-5xl font-bold text-white'>
+                  {count.committee}+
+                </div>
+              </div>
               {/* Notice Board */}
               {show && 
                 <div className=''>

@@ -81,7 +81,7 @@ const AllBookings = () => {
                                         </td>
                                         <td className="px-6 py-4">{book.funcType}</td>
                                         <td className="px-6 py-4">{moment(book.bookDate).format('YYYY-MM-DD')}</td>
-                                        <td className="px-6 py-4">{book.memId.name}</td>
+                                        <td className="px-6 py-4">{book.member.name}</td>
                                         <td className="px-6 py-4 font-medium text-yellow-400">{moment(book.dateFrom).format('YYYY-MM-DD')}</td>
                                         <td className="px-6 py-4 font-medium text-yellow-400">{moment(book.dateTo).format('YYYY-MM-DD')}</td>
                                         <td className="px-6 py-4">
