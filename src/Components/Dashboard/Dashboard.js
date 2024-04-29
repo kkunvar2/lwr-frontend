@@ -7,11 +7,14 @@ import axios from 'axios'
 import { HiUserGroup } from "react-icons/hi2";
 import { FaBell } from "react-icons/fa6";
 import NoticeBoard from './NoticeBoard'
+import Promote from './Promote'
 
 const Dashboard = () => {
 
     const isGuard = isUserRole();
+
     const [showNoticeboard, setshowNoticeboard] = useState(false)
+    const [showpromote, setShowPromote] = useState(false)
     const [alert, setalert] = useState(false)
     const [username, setusername] = useState('')
     const [notice, setnotice] = useState([])
@@ -69,6 +72,10 @@ const Dashboard = () => {
     const openNoticeBoard = () => {
         setshowNoticeboard(!showNoticeboard)
     }
+
+    const openPromote = () => {
+        setShowPromote(!showpromote)
+    }
     return (
         <>
    <div className='h-auto md:h-screen bg-slate-300'>   
@@ -77,7 +84,9 @@ const Dashboard = () => {
    </div>
     <div className=' flex items-center justify-center flex-col pb-6'>
             <h1 className='text-5xl font-bold mt-10 text-slate-400'>Welcome {username}</h1>
-            {showNoticeboard && <NoticeBoard setshowNoticeboard={setshowNoticeboard} open={true} />}  
+            {showNoticeboard && <NoticeBoard setshowNoticeboard={setshowNoticeboard} open={true} />} 
+            {showpromote && <Promote setShowPromote={setShowPromote} open={true} />}  
+
             <div className='grid sm:grid-cols-2 grid-cols-1 mt-12 gap-10 '>
                 {/* Maintanance */}
                 {!isGuard &&
@@ -186,7 +195,7 @@ const Dashboard = () => {
             <div className='fixed bottom-20 right-3 md:bottom-28 bg-black p-2 rounded-full '
                 >
                 <HiUserGroup className='text-white h-7 w-7'
-                onClick=''/>
+                onClick={openPromote}/>
             </div>
         </div>
     </div>
