@@ -5,11 +5,13 @@ import { FaPen } from "react-icons/fa";
 import axios from 'axios';
 import { logoutUser } from '../Services/authService';
 import { useNavigate } from 'react-router-dom';
+import readImage from '../Services/readImage';
 
 
 const Profile = () => {
     const navigate = useNavigate();
-    const fileInputRef = useRef(null);  
+    const form = useRef();  
+    const fileInput = useRef();
     const [editProfile, setEditProfile] = useState({
         profile: false,
         imgSave: false
@@ -76,8 +78,10 @@ const Profile = () => {
 }
 
     //Update Profile
-    const handleImageChange = (e) => {
-        setUserImage(e.target.files[0]);
+    const handleImageChange = async(e) => {
+        const imageString = await readImage(e.target.files[0]);
+        console.log(imageString);
+        setUserImage(imageString)
         setEditProfile({...editProfile, imgSave: true})
     };
 
@@ -92,7 +96,6 @@ const Profile = () => {
         axios.patch('http://localhost:8081/lwresident/v1/member/update-profile-pic', formData, {
             headers: {
                 'Authorization': `Bearer ${token}`,
-                'Content-Type': 'multipart/form-data' 
             }
         })
         .then((res) => {
@@ -116,7 +119,7 @@ const handleLogout = () =>{
         <div className='bg-slate-200 h-screen'>
             <Nav/>
             <div className='md:px-24 px-3'>
-                <div className='flex py-10 items-center gap-6'>
+                <form ref={form} onSubmit={handleSaveProfile} className='flex py-10 items-center gap-6'>
                     <div className='flex flex-col relative'>
                     {userImage ? (
                         <img
@@ -126,25 +129,25 @@ const handleLogout = () =>{
                         ) : (
                         <LuUser2 className="h-24 w-24 rounded-full" />
                     )}
-                            <button
-                                className='absolute bottom-0 right-0 bg-gray-300 p-1 rounded-full hover:bg-gray-400'
-                                onClick={() => fileInputRef.current.click()}>
-                                <FaPen className='h-6 w-6 text-gray-700' />
-                            </button>
+                    <button
+                        className='absolute bottom-0 right-0 bg-gray-300 p-1 rounded-full hover:bg-gray-400'
+                        onClick={() => fileInput.current.click()}>
+                        <FaPen className='h-6 w-6 text-gray-700' />
+                    </button>
                           
                             <input
-                                ref={fileInputRef}
+                                ref={fileInput}
                                 type='file'
-                                name='photo'
-                                className='hidden'
+                                className='hidden' 
                                 onChange={handleImageChange}
+                                accept='image/*'
                             />
                         </div>
                     {editProfile.imgSave && (
                         <button
                             className='bg-blue-500 px-3 h-10 mt-2 shadow-lg rounded-md mx-2 text-white font-semibold hover:bg-gray-700'
-                            type='button' 
-                            onClick={handleSaveProfile}>
+                            type='submit' 
+                            >
                                     Save
                                 </button>
                     )}
@@ -158,7 +161,7 @@ const handleLogout = () =>{
                             <FaPen className='text-yellow-500'/>
                         </div>
                     </div>
-                </div>
+                </form>
 
                 {/* edit profile */}
                 <div className='flex flex-col '>
@@ -189,14 +192,6 @@ const handleLogout = () =>{
                                     type='email'
                                     name='email'
                                     value={userData.email}
-                                    onChange={handleChange}/>
-                            </div>
-                            <div className='flex flex-col text-sm gap-2'>
-                                <label>Password:</label>
-                                <input className='bg-slate-100 rounded-md h-7 p-2'
-                                    type='password'
-                                    name='password'
-                                    value={userData.password}
                                     onChange={handleChange}/>
                             </div>
                             <button className='bg-blue-500 px-3 h-10 mt-2 shadow-lg rounded-md mx-2 text-white font-semibold hover:bg-gray-700'

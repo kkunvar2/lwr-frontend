@@ -33,7 +33,7 @@ const GuestReport = () => {
             .then(res => {
                 setguest(guest.filter(g => g.id !== id))
                 alert("checkOut Successful");
-                navigate('/guest');
+                navigate('/guestrecords');
             })  
             .catch(err =>  console.log("Can't Checkout"))
     }
@@ -56,7 +56,7 @@ const GuestReport = () => {
                                 <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                     {guest.name}
                                 </td>
-                                <td className="px-6 py-4">{guest.date}</td>
+                                <td className="px-6 py-4">{moment(guest.checkIn).format('YYYY-MM-DD')}</td>
                                 <td className="px-6 py-4">{moment(guest.checkIn).format('hh:mm:ss A')}</td>
                                 <td className="px-6 py-4">{guest.mobile}</td>
                                 <td className="px-6 py-4">

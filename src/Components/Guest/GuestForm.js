@@ -6,6 +6,7 @@ const GuestForm = () => {
 
     const navigate = useNavigate();
 
+    const [msg, setMsg] = useState(false)
     const wings = ['A', 'B', 'C', 'D'];
     const [formdata, setFormdata] = useState({
         name: '',
@@ -24,8 +25,8 @@ const GuestForm = () => {
     const [selwing, setSelWing] = useState('');
     const [selfloor, setSelFloor] = useState('');
 
-    const handleCheckIn = () => {
-
+    const handleCheckIn = (e) => {
+        e.preventDefault()
         fetch('http://localhost:8081/lwresident/v1/guest/new-user', {
             method: 'POST',
             headers: {
@@ -34,18 +35,13 @@ const GuestForm = () => {
             body: JSON.stringify(formdata)
         })
         .then((res) => {
-            if(res.ok){
-                console.log("checked In Successfully");
-                navigate("/guestreport")
-                return res.json();
-            }else{
-                console.log(res)
-                // throw new Error('Failed to check in');
-            }
+            setMsg(true)
+            setTimeout(() => {
+                setMsg(false)
+            }, 2000)
+            console.log('Checked in Successfully');
         })
-        
-    }
-  
+    } 
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormdata({ ...formdata, [name]: value });
@@ -115,6 +111,11 @@ const GuestForm = () => {
                     Check In
                     {/* <img src='' alt="Next Icon" className=" ml-3 w-6 h-6"/> */}
                     </button>
+
+                {msg && 
+                <div className='w-auto bg-green-200 rounded-md p-2 border border-green-600'>
+                    <p className='tracking-wider text-green-600 text-lg font-normal '> Checked in Successfully</p>                    
+                </div>}
             </form>
         </div>      
     </>
