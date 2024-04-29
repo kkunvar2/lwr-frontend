@@ -30,7 +30,7 @@ const Approval = () => {
     const handleAccept = (id) => {
         try{
             const token = localStorage.getItem('token')
-            const response = axios.patch(`http://localhost:8081/lwresident/v1/admin/requests/approve/${id}`,{
+            const response = axios.put(`http://localhost:8081/lwresident/v1/admin/requests/approve/${id}`,{
                 headers:{
                     'Authoization': `Bearer ${token}`
                 } 
